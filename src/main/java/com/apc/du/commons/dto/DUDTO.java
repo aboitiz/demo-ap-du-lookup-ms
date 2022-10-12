@@ -17,7 +17,9 @@ import javax.persistence.Table;
 public class DUDTO {
 
     private String barangayCode;
-    private String cityBarangay;
+    private String province;
+    private String city;
+    private String barangay;
     private String du;
 
 }

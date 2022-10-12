@@ -27,4 +27,6 @@ public class City extends AuditableEntity {
     @Type(type = "org.hibernate.type.TextType")
     private String description;
 
+    @Column(length = 255)
+    private String provinceCode;
 }

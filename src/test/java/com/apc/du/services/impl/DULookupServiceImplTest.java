@@ -34,31 +34,31 @@ class DULookupServiceImplTest {
     @Test
     void success_getDUBarangayCode() {
         when(barangayRepository.getDUByBarangayCode("CEBCADL")).thenReturn(getDu());
-        when(service.getDUByCityBarangay("Cebu City", "Adlaon","CEBCADL")).thenReturn(null);
+        when(service.getDUByCityBarangay("CEBU","Cebu City", "Adlaon","CEBCADL")).thenReturn(null);
     }
 
     @Test
     void success_getDUCityBrngy() {
-        when(barangayRepository.getDUByCityBarangay("Cebu City Adlaon")).thenReturn(getDu());
-        when(service.getDUByCityBarangay("Cebu City", "Adlaon",null)).thenReturn(null);
+        when(barangayRepository.getDUByProvinceCityBarangay("Cebu","Cebu","Adlaon")).thenReturn(getDu());
+        when(service.getDUByCityBarangay("CEBU","Cebu City", "Adlaon",null)).thenReturn(null);
     }
 
     @Test
     void success_getDUCityBrngy_with_cityCheck() {
-        when(barangayRepository.getDUByCityBarangay("Cebu City Adlaon")).thenReturn(getDu());
-        when(service.getDUByCityBarangay("Cebu", "Adlaon",null)).thenReturn(null);
+        when(barangayRepository.getDUByProvinceCityBarangay("Cebu","Cebu","Adlaon")).thenReturn(getDu());
+        when(service.getDUByCityBarangay("CEBU","Cebu", "Adlaon",null)).thenReturn(null);
     }
 
     @Test
     void returnsNull_getDu() {
         when(barangayRepository.getDUByBarangayCode("CEBCADL")).thenReturn(null);
-        when(service.getDUByCityBarangay("Cebu City", "Adlaon",null)).thenReturn(null);
+        when(service.getDUByCityBarangay("CEBU","Cebu City", "Adlaon",null)).thenReturn(null);
     }
 
     @Test
     void runOnException_getDu() {
         when(barangayRepository.getDUByBarangayCode("CEBCADL")).thenThrow(new RuntimeException());
-        when(service.getDUByCityBarangay("Cebu City", "Adlaon",null)).thenThrow(new RuntimeException());
+        when(service.getDUByCityBarangay("CEBU","Cebu City", "Adlaon",null)).thenThrow(new RuntimeException());
 
     }
 
@@ -66,7 +66,9 @@ class DULookupServiceImplTest {
     private List<DUDTO> getDu() {
         DUDTO du = new DUDTO();
         du.setDu("VECO");
-        du.setCityBarangay("Cebu City Adlaon");
+        du.setProvince("Cebu");
+        du.setCity("Cebu");
+        du.setBarangay("Adlaon");
         du.setBarangayCode("CEBCADL");
         List<DUDTO> duList = new ArrayList<>();
         duList.add(du);

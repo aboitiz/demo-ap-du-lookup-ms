@@ -5,6 +5,6 @@ import com.apc.commons.response.BaseResponse;
 public interface DULookupService {
 
 
-    BaseResponse getDUByCityBarangay(String city, String barangay, String barangayCode);
+    BaseResponse getDUByCityBarangay(String province,String city, String barangay, String barangayCode);
 
 }
