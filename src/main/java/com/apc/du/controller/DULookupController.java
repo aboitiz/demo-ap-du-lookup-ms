@@ -28,7 +28,7 @@ public class DULookupController {
                               @RequestParam String barangay,
                               @RequestParam(required = false) String barangayCode) {
 
-        return dULookupService.getDUByCityBarangay(city, barangay, barangayCode);
+        return dULookupService.getDUByCityBarangay(province, city, barangay, barangayCode);
     }
 
 }

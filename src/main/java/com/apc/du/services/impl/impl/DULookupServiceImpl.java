@@ -24,17 +24,17 @@ public class DULookupServiceImpl implements DULookupService {
     private BarangayRepository barangayRepository;
 
     @Override
-    public BaseResponse getDUByCityBarangay(String city, String barangay, String barangayCode) {
+    public BaseResponse getDUByCityBarangay(String province,String city, String barangay, String barangayCode) {
         List<DUDTO> duList = null;
         log.info("========= Fetching du by cityBarangay");
 
         try {
+
             if(StringUtils.isNotEmpty(barangayCode)){
                 duList = barangayRepository.getDUByBarangayCode(barangayCode);
             }else{
-                city = cityChecker(city);
-                String cityBarangay = city + " " + barangay.trim();
-                duList = barangayRepository.getDUByCityBarangay(cityBarangay);
+                city = cityChecker(city.trim());
+                duList = barangayRepository.getDUByProvinceCityBarangay(province, city, barangay);
             }
             log.info("========== All du fetched successfully. Size : {}", duList);
         } catch (Exception e) {
@@ -57,9 +57,9 @@ public class DULookupServiceImpl implements DULookupService {
 
     private String cityChecker(String city){
         log.info("========= START: city check");
-        if((!city.contains("city")) && (!city.contains("City"))){
+        if((city.contains("city")) && (city.contains("City"))){
             log.info("=========: city check");
-            city = city.trim() + " City";
+            city = city.split(" ")[0];
         }
         return city.trim();
     }

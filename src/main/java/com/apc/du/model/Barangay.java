@@ -30,4 +30,6 @@ public class Barangay extends AuditableEntity {
     @Column(length = 50)
     private String du;
 
+    @Column(length = 255)
+    private String cityCode;
 }

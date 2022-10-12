@@ -31,7 +31,7 @@ class DULookupControllerTest {
 
     @Test
     void getRequirements() throws Exception {
-        when(service.getDUByCityBarangay(any(), any(), any())).thenReturn(null);
+        when(service.getDUByCityBarangay(any(), any(), any(), any())).thenReturn(null);
         mockMvc.perform(
                         get(url() + "/du")
                                 .param("province","Cebu")

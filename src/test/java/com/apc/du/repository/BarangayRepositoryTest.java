@@ -39,11 +39,11 @@ class BarangayRepositoryTest {
 
     @Test
     void success_getBarangayByCityBarangay() {
-        List<DUDTO> result = repository.getDUByCityBarangay("Cebu City Adlaon");
+        List<DUDTO> result = repository.getDUByProvinceCityBarangay("Cebu","Cebu","Adlaon");
         assertThat(result).isInstanceOf(List.class);
     }
     private List<Barangay> getBarangay() {
-        Barangay req = new Barangay("CEBCADL","Cebu City Adlaon","VECO");
+        Barangay req = new Barangay("CEBCADL","Cebu City Adlaon","VECO", "CEB");
         List<Barangay> barangays = new ArrayList<>();
         barangays.add(req);
         return barangays;
