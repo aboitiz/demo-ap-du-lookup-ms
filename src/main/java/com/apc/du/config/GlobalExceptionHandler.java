@@ -8,12 +8,15 @@ import com.apc.du.exceptions.ServiceDisconnectedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
+@ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
@@ -81,7 +84,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<BaseResponse<?>> handleServiceDisconnectedException(Exception ex, HttpServletRequest httpReq) {
         log.error(APIResponse.SERVICE_DISCONNECTED.getDescription(), ex);
         return buildErrorResponse(String.valueOf(APIResponse.SERVICE_DISCONNECTED.getCode()),
-                APIResponse.SERVICE_DISCONNECTED, httpReq, HttpStatus.INTERNAL_SERVER_ERROR);
+                APIResponse.SERVICE_DISCONNECTED, httpReq, HttpStatus.REQUEST_TIMEOUT);
 
     }
 }
