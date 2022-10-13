@@ -4,6 +4,7 @@ package com.apc.du.controller;
 import com.apc.commons.response.BaseResponse;
 import com.apc.du.commons.constants.APIPathConstants;
 import com.apc.du.config.SwaggerConfiguration;
+import com.apc.du.exceptions.ServiceDisconnectedException;
 import com.apc.du.services.impl.DULookupService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,7 @@ public class DULookupController {
     public BaseResponse getDUByCityBarangay(@RequestParam String province,
                               @RequestParam String city,
                               @RequestParam String barangay,
-                              @RequestParam(required = false) String barangayCode) {
+                              @RequestParam(required = false) String barangayCode) throws ServiceDisconnectedException {
 
         return dULookupService.getDUByCityBarangay(province, city, barangay, barangayCode);
     }

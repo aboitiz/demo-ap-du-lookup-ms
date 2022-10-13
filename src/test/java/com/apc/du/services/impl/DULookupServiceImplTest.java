@@ -1,6 +1,7 @@
 package com.apc.du.services.impl;
 
 import com.apc.du.commons.dto.DUDTO;
+import com.apc.du.exceptions.ServiceDisconnectedException;
 import com.apc.du.repository.BarangayRepository;
 import com.apc.du.services.impl.impl.DULookupServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,31 +33,31 @@ class DULookupServiceImplTest {
     }
 
     @Test
-    void success_getDUBarangayCode() {
+    void success_getDUBarangayCode() throws ServiceDisconnectedException {
         when(barangayRepository.getDUByBarangayCode("CEBCADL")).thenReturn(getDu());
         when(service.getDUByCityBarangay("CEBU","Cebu City", "Adlaon","CEBCADL")).thenReturn(null);
     }
 
     @Test
-    void success_getDUCityBrngy() {
+    void success_getDUCityBrngy()  throws ServiceDisconnectedException {
         when(barangayRepository.getDUByProvinceCityBarangay("Cebu","Cebu","Adlaon")).thenReturn(getDu());
         when(service.getDUByCityBarangay("CEBU","Cebu City", "Adlaon",null)).thenReturn(null);
     }
 
     @Test
-    void success_getDUCityBrngy_with_cityCheck() {
+    void success_getDUCityBrngy_with_cityCheck()  throws ServiceDisconnectedException {
         when(barangayRepository.getDUByProvinceCityBarangay("Cebu","Cebu","Adlaon")).thenReturn(getDu());
         when(service.getDUByCityBarangay("CEBU","Cebu", "Adlaon",null)).thenReturn(null);
     }
 
     @Test
-    void returnsNull_getDu() {
+    void returnsNull_getDu()  throws ServiceDisconnectedException {
         when(barangayRepository.getDUByBarangayCode("CEBCADL")).thenReturn(null);
         when(service.getDUByCityBarangay("CEBU","Cebu City", "Adlaon",null)).thenReturn(null);
     }
 
     @Test
-    void runOnException_getDu() {
+    void runOnException_getDu()  throws ServiceDisconnectedException {
         when(barangayRepository.getDUByBarangayCode("CEBCADL")).thenThrow(new RuntimeException());
         when(service.getDUByCityBarangay("CEBU","Cebu City", "Adlaon",null)).thenThrow(new RuntimeException());
 
