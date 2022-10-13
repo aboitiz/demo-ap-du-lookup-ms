@@ -2,6 +2,7 @@ package com.apc.du.config;
 
 import com.apc.commons.helper.DateHelper;
 import com.apc.commons.response.BaseResponse;
+import com.apc.du.commons.dto.APIErrorResponseDTO;
 import com.apc.du.commons.enums.APIResponse;
 import com.apc.du.exceptions.APException;
 import com.apc.du.exceptions.ServiceDisconnectedException;
@@ -45,13 +46,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<BaseResponse<?>> buildErrorResponse(String statusCode, APIResponse apiResponse,
                                                                  HttpServletRequest httpReq, HttpStatus httpStatus) {
 
-        BaseResponse<String> errResponse = new BaseResponse<>();
+        BaseResponse<APIErrorResponseDTO> errResponse = new BaseResponse<>();
 
         try {
+
             errResponse.setTimestamp(getTimestamp());
             errResponse.setStatusCode(statusCode);
             errResponse.setMessage(apiResponse.getMessage());
-            errResponse.setData(httpReq.getRequestURI());
+            errResponse.setData(APIErrorResponseDTO.builder().error(apiResponse.getDescription()).build());
 
         } catch (APException e) {
             log.debug(e.getMessage(), e);
@@ -87,4 +89,5 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 APIResponse.SERVICE_DISCONNECTED, httpReq, HttpStatus.REQUEST_TIMEOUT);
 
     }
+
 }
