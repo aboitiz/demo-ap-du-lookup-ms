@@ -1,6 +1,6 @@
 package com.apc.du.repository;
 
-import com.apc.du.commons.dto.DUDTO;
+import com.apc.du.commons.dto.DistributionUtilityDTO;
 import com.apc.du.model.Barangay;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,13 +33,13 @@ class BarangayRepositoryTest {
 
     @Test
     void success_getBarangayByCode() {
-        List<DUDTO> result = repository.getDUByBarangayCode("CEBCADL");
+        List<DistributionUtilityDTO> result = repository.getDUByBarangayCode("CEBCADL");
         assertThat(result).isInstanceOf(List.class);
     }
 
     @Test
     void success_getBarangayByCityBarangay() {
-        List<DUDTO> result = repository.getDUByProvinceCityBarangay("Cebu","Cebu","Adlaon");
+        List<DistributionUtilityDTO> result = repository.getDUByProvinceCityBarangay("Cebu","Cebu","Adlaon");
         assertThat(result).isInstanceOf(List.class);
     }
     private List<Barangay> getBarangay() {

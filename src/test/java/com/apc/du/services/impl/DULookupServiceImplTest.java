@@ -1,6 +1,6 @@
 package com.apc.du.services.impl;
 
-import com.apc.du.commons.dto.DUDTO;
+import com.apc.du.commons.dto.DistributionUtilityDTO;
 import com.apc.du.exceptions.ServiceDisconnectedException;
 import com.apc.du.repository.BarangayRepository;
 import com.apc.du.services.impl.impl.DULookupServiceImpl;
@@ -35,43 +35,40 @@ class DULookupServiceImplTest {
     @Test
     void success_getDUBarangayCode() throws ServiceDisconnectedException {
         when(barangayRepository.getDUByBarangayCode("CEBCADL")).thenReturn(getDu());
-        when(service.getDUByCityBarangay("CEBU","Cebu City", "Adlaon","CEBCADL")).thenReturn(null);
+        when(service.getDistributionUtility("CEBU","Cebu City", "Adlaon","CEBCADL")).thenReturn(null);
     }
 
     @Test
     void success_getDUCityBrngy()  throws ServiceDisconnectedException {
         when(barangayRepository.getDUByProvinceCityBarangay("Cebu","Cebu","Adlaon")).thenReturn(getDu());
-        when(service.getDUByCityBarangay("CEBU","Cebu City", "Adlaon",null)).thenReturn(null);
+        when(service.getDistributionUtility("CEBU","Cebu City", "Adlaon",null)).thenReturn(null);
     }
 
     @Test
     void success_getDUCityBrngy_with_cityCheck()  throws ServiceDisconnectedException {
         when(barangayRepository.getDUByProvinceCityBarangay("Cebu","Cebu","Adlaon")).thenReturn(getDu());
-        when(service.getDUByCityBarangay("CEBU","Cebu", "Adlaon",null)).thenReturn(null);
+        when(service.getDistributionUtility("CEBU","Cebu", "Adlaon",null)).thenReturn(null);
     }
 
     @Test
     void returnsNull_getDu()  throws ServiceDisconnectedException {
         when(barangayRepository.getDUByBarangayCode("CEBCADL")).thenReturn(null);
-        when(service.getDUByCityBarangay("CEBU","Cebu City", "Adlaon",null)).thenReturn(null);
+        when(service.getDistributionUtility("CEBU","Cebu City", "Adlaon",null)).thenReturn(null);
     }
 
     @Test
     void runOnException_getDu()  throws ServiceDisconnectedException {
         when(barangayRepository.getDUByBarangayCode("CEBCADL")).thenThrow(new RuntimeException());
-        when(service.getDUByCityBarangay("CEBU","Cebu City", "Adlaon",null)).thenThrow(new RuntimeException());
+        when(service.getDistributionUtility("CEBU","Cebu City", "Adlaon",null)).thenThrow(new RuntimeException());
 
     }
 
-
-    private List<DUDTO> getDu() {
-        DUDTO du = new DUDTO();
-        du.setDu("VECO");
-        du.setProvince("Cebu");
-        du.setCity("Cebu");
-        du.setBarangay("Adlaon");
-        du.setBarangayCode("CEBCADL");
-        List<DUDTO> duList = new ArrayList<>();
+    private List<DistributionUtilityDTO> getDu() {
+        DistributionUtilityDTO du = new DistributionUtilityDTO();
+        du.setId(1L);
+        du.setCode("VECO");
+        du.setDescription("Visaya Electric");
+        List<DistributionUtilityDTO> duList = new ArrayList<>();
         duList.add(du);
         return duList;
     }

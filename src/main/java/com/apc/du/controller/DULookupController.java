@@ -24,12 +24,12 @@ public class DULookupController {
     private DULookupService dULookupService;
 
     @GetMapping("/du")
-    public BaseResponse getDUByCityBarangay(@RequestParam String province,
+    public BaseResponse getDistributionUtility(@RequestParam String province,
                               @RequestParam String city,
                               @RequestParam String barangay,
                               @RequestParam(required = false) String barangayCode) throws ServiceDisconnectedException {
 
-        return dULookupService.getDUByCityBarangay(province, city, barangay, barangayCode);
+        return dULookupService.getDistributionUtility(province, city, barangay, barangayCode);
     }
 
 }

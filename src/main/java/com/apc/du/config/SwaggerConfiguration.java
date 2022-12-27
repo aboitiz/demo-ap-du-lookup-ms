@@ -1,6 +1,5 @@
 package com.apc.du.config;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,8 +13,7 @@ import java.util.function.Predicate;
 
 @Configuration
 public class SwaggerConfiguration {
-
-    public static final String DU = "DU-Lookup";
+    public static final String DU = "Distribution Utility Lookup";
 
     @Bean
     public Docket api() {
@@ -25,8 +23,6 @@ public class SwaggerConfiguration {
                 .paths(Predicate.not(PathSelectors.regex("/error")))
                 .paths(Predicate.not(PathSelectors.regex("/profile")))
                 .build()
-                .tags(new Tag(DU, "This page documents service inquiry RESTful Service Endpoints"));
+                .tags(new Tag(DU, "This page documents Distribution Utility Lookup Service RESTful Endpoints"));
     }
-
-
 }

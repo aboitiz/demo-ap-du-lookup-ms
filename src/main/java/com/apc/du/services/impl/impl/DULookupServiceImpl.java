@@ -2,7 +2,7 @@ package com.apc.du.services.impl.impl;
 
 import com.apc.commons.response.BaseResponse;
 import com.apc.du.commons.dto.APIErrorResponseDTO;
-import com.apc.du.commons.dto.DUDTO;
+import com.apc.du.commons.dto.DistributionUtilityDTO;
 import com.apc.du.commons.enums.APIResponse;
 import com.apc.du.exceptions.ServiceDisconnectedException;
 import com.apc.du.repository.BarangayRepository;
@@ -23,36 +23,40 @@ public class DULookupServiceImpl implements DULookupService {
     private BarangayRepository barangayRepository;
 
     @Override
-    public BaseResponse getDUByCityBarangay(String province, String city, String barangay, String barangayCode) throws ServiceDisconnectedException {
-        List<DUDTO> duList = null;
+    public BaseResponse getDistributionUtility(String province, String city, String barangay, String barangayCode) throws ServiceDisconnectedException {
+        List<DistributionUtilityDTO> duList = null;
         try {
             if (StringUtils.isNotEmpty(barangayCode)) {
-                log.info("========= Fetching du by barangayCode");
+                log.info("========= Fetching by barangayCode");
                 duList = barangayRepository.getDUByBarangayCode(barangayCode);
             } else {
-                log.info("========= Fetching du by provinceCityBarangay");
+                log.info("========= Fetching by provinceCityBarangay");
                 city = cityChecker(city.trim());
                 duList = barangayRepository.getDUByProvinceCityBarangay(province, city, barangay);
             }
-            log.info("========== All du fetched successfully. Size : {}", duList);
+            log.info("========== All DU fetched successfully. Size : {}", duList);
+
+            if (duList.size() == 0) {
+                return errorResponse();
+            }
         } catch (Exception e) {
-            log.error("Exception occurred while fetching all du. Message: {}", e.getMessage());
-            throw new ServiceDisconnectedException("408", HttpStatus.REQUEST_TIMEOUT);
+            log.error("Exception occurred while fetching all DU. Message: {}", e.getMessage());
+            throw new ServiceDisconnectedException(APIResponse.SERVICE_DISCONNECTED.toString(), HttpStatus.REQUEST_TIMEOUT);
         }
 
         return new BaseResponse(duList);
     }
 
-    private BaseResponse<APIErrorResponseDTO> buildServiceDisconnectedResponse() {
+    private BaseResponse<APIErrorResponseDTO> errorResponse() {
         BaseResponse<APIErrorResponseDTO> err = new BaseResponse<>();
 
-        err.setStatusCode(String.valueOf(APIResponse.SERVICE_DISCONNECTED.getCode()));
-        err.setMessage(APIResponse.SERVICE_DISCONNECTED.getMessage());
-        err.setData(APIErrorResponseDTO.builder().error(APIResponse.SERVICE_DISCONNECTED.getDescription()).build());
+        err.setStatusCode(String.valueOf(APIResponse.APPLICATION_STATUS_NOT_FOUND.getCode()));
+        err.setMessage("Resource Not Found");
+        err.setData(APIErrorResponseDTO.builder().error("No Distribution Utility for the location provided").build());
         return err;
     }
 
-    private String cityChecker(String city){
+    private String cityChecker(String city) {
         log.info("========= START: city check");
         if ((city.contains("city")) && (city.contains("City"))) {
             log.info("=========: city check");
