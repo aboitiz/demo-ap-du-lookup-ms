@@ -10,5 +10,5 @@ public class DUDTO {
     private String province;
     private String city;
     private String barangay;
-    private String du;
+    private String distributionUtility;
 }

@@ -30,7 +30,7 @@ public class City extends AuditableEntity {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "provinceId")
+    @JoinColumn(name = "province_id")
     public Province province;
 
     @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)

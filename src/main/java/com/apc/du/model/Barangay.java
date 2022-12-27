@@ -28,10 +28,10 @@ public class Barangay extends AuditableEntity {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "cityId")
+    @JoinColumn(name = "city_id")
     public City city;
 
     @ManyToOne
-    @JoinColumn(name = "distributionUtilityId")
+    @JoinColumn(name = "distributionUtility_id")
     public DistributionUtility distributionUtility;
 }
