@@ -5,7 +5,6 @@ import com.apc.du.commons.dto.APIErrorResponseDTO;
 import com.apc.du.commons.dto.DUDTO;
 import com.apc.du.commons.enums.APIResponse;
 import com.apc.du.exceptions.ServiceDisconnectedException;
-import com.apc.du.model.Barangay;
 import com.apc.du.repository.BarangayRepository;
 import com.apc.du.services.impl.DULookupService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,35 +14,32 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 public class DULookupServiceImpl implements DULookupService {
 
-
     @Autowired
     private BarangayRepository barangayRepository;
 
     @Override
-    public BaseResponse getDUByCityBarangay(String province,String city, String barangay, String barangayCode) throws ServiceDisconnectedException {
+    public BaseResponse getDUByCityBarangay(String province, String city, String barangay, String barangayCode) throws ServiceDisconnectedException {
         List<DUDTO> duList = null;
-        log.info("========= Fetching du by cityBarangay");
-
         try {
-
-            if(StringUtils.isNotEmpty(barangayCode)){
+            if (StringUtils.isNotEmpty(barangayCode)) {
+                log.info("========= Fetching du by barangayCode");
                 duList = barangayRepository.getDUByBarangayCode(barangayCode);
-            }else{
+            } else {
+                log.info("========= Fetching du by provinceCityBarangay");
                 city = cityChecker(city.trim());
                 duList = barangayRepository.getDUByProvinceCityBarangay(province, city, barangay);
             }
             log.info("========== All du fetched successfully. Size : {}", duList);
         } catch (Exception e) {
             log.error("Exception occurred while fetching all du. Message: {}", e.getMessage());
-
             throw new ServiceDisconnectedException("408", HttpStatus.REQUEST_TIMEOUT);
         }
+
         return new BaseResponse(duList);
     }
 
@@ -56,13 +52,13 @@ public class DULookupServiceImpl implements DULookupService {
         return err;
     }
 
-
     private String cityChecker(String city){
         log.info("========= START: city check");
-        if((city.contains("city")) && (city.contains("City"))){
+        if ((city.contains("city")) && (city.contains("City"))) {
             log.info("=========: city check");
             city = city.split(" ")[0];
         }
+
         return city.trim();
     }
 }

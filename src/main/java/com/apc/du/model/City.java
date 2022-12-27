@@ -19,14 +19,14 @@ import javax.persistence.Table;
 @ToString
 public class City extends AuditableEntity {
 
-    @Column(length = 255)
-    private String cityCode;
+    @Column(name = "code", length = 255)
+    private String code;
 
     @Column
     @Lob
     @Type(type = "org.hibernate.type.TextType")
     private String description;
 
-    @Column(length = 255)
+    @Column(name = "province_code", length = 255)
     private String provinceCode;
 }

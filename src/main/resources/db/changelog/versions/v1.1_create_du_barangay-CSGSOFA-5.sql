@@ -1,17 +1,16 @@
- create table public.barangay (
-    id serial primary key not null,
-    barangay_code varchar(255) not null,
-    description text not null,
-    du varchar(50),
-    city_code varchar(255) not null,
+ CREATE TABLE public.barangay (
+    id SERIAL PRIMARY KEY NOT NULL,
+    code VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    du VARCHAR(50),
+    city_code varchar(255) NOT NULL,
     created_at TIMESTAMP default CURRENT_TIMESTAMP,
-    modified_at TIMESTAMP default null
+    modified_at TIMESTAMP default NULL
  );
 
 INSERT INTO public.barangay
-(barangay_code, description, du, city_code, created_at, modified_at)
+(code, description, du, city_code, created_at, modified_at)
 VALUES
-
 ('CARCALE','Alejal','DLPC','CAR',CURRENT_TIMESTAMP,NULL),
 ('CARCANI','Anibongan','DLPC','CAR',CURRENT_TIMESTAMP,NULL),
 ('CARCASU','Asuncion','DLPC','CAR',CURRENT_TIMESTAMP,NULL),

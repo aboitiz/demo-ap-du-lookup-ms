@@ -11,21 +11,19 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "du")
+@Table(name = "distribution_utility")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class DU extends AuditableEntity {
+public class DistributionUtility extends AuditableEntity {
 
-    @Column(length = 255)
-    private String duCode;
+    @Column(name = "code", length = 255)
+    private String code;
 
     @Column
     @Lob
     @Type(type = "org.hibernate.type.TextType")
     private String description;
-
-
 }

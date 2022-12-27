@@ -1,16 +1,16 @@
 
- create table public.postal_code (
-    id serial primary key not null,
-    postal_code varchar(255) not null,
-    description text not null,
+ CREATE TABLE public.postal_code (
+    id SERIAL PRIMARY KEY NOT NULL,
+    code VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
     created_at TIMESTAMP default CURRENT_TIMESTAMP,
-    modified_at TIMESTAMP default null
+    modified_at TIMESTAMP default NULL
  );
 
-
 INSERT INTO public.postal_code
-(postal_code, description, created_at, modified_at)
-VALUES('6000','6000',CURRENT_TIMESTAMP, NULL),
+(code, description, created_at, modified_at)
+VALUES
+('6000','6000',CURRENT_TIMESTAMP, NULL),
 ('6001','6001',CURRENT_TIMESTAMP, NULL),
 ('6002','6002',CURRENT_TIMESTAMP, NULL),
 ('6014','6014',CURRENT_TIMESTAMP, NULL),

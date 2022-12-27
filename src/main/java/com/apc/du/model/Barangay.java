@@ -19,8 +19,8 @@ import javax.persistence.Table;
 @ToString
 public class Barangay extends AuditableEntity {
 
-    @Column(length = 255)
-    private String barangayCode;
+    @Column(name = "code", length = 255)
+    private String code;
 
     @Column
     @Lob
@@ -30,6 +30,6 @@ public class Barangay extends AuditableEntity {
     @Column(length = 50)
     private String du;
 
-    @Column(length = 255)
+    @Column(name = "city_code", length = 255)
     private String cityCode;
 }

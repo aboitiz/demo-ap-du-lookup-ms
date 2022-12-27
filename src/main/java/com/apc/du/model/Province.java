@@ -19,8 +19,8 @@ import javax.persistence.Table;
 @ToString
 public class Province extends AuditableEntity {
 
-    @Column(length = 255)
-    private String provinceCode;
+    @Column(name = "code", length = 255)
+    private String code;
 
     @Column
     @Lob

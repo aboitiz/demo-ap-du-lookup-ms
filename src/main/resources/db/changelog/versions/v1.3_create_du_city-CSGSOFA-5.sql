@@ -1,16 +1,15 @@
 
- create table public.city (
-    id serial primary key not null,
-    city_code varchar(255) not null,
-    description text not null,
-    province_code varchar(255) not null,
+ CREATE TABLE public.city (
+    id SERIAL PRIMARY KEY NOT NULL,
+    code VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    province_code VARCHAR(255) NOT NULL,
     created_at TIMESTAMP default CURRENT_TIMESTAMP,
-    modified_at TIMESTAMP default null
+    modified_at TIMESTAMP default NULL
  );
 
-
 INSERT INTO public.city
-(city_code, description, province_code, created_at, modified_at)
+(code, description, province_code, created_at, modified_at)
 VALUES
 ('BUN','Bunawan','DAVS',CURRENT_TIMESTAMP,NULL),
 ('CAR','Carmen','CEB',CURRENT_TIMESTAMP,NULL),

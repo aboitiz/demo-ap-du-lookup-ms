@@ -1,15 +1,14 @@
 
- create table public.province (
-    id serial primary key not null,
-    province_code varchar(255) not null,
-    description text not null,
+ CREATE TABLE public.province (
+    id SERIAL PRIMARY KEY NOT NULL,
+    code VARCHAR(255) NOT NULL,
+    description text NOT NULL,
     created_at TIMESTAMP default CURRENT_TIMESTAMP,
-    modified_at TIMESTAMP default null
+    modified_at TIMESTAMP default NULL
  );
 
-
 INSERT INTO public.province
-(province_code, description, created_at, modified_at)
+(code, description, created_at, modified_at)
 VALUES
 ('CEB','CEBU',CURRENT_TIMESTAMP,NULL),
 ('DAVS','DAVAO DEL SUR',CURRENT_TIMESTAMP,NULL),
