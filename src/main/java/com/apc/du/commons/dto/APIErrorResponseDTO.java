@@ -1,24 +1,12 @@
 package com.apc.du.commons.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class APIErrorResponseDTO {
-
-
     private String error;
-
-    public APIErrorResponseDTO() {
-
-    }
-
-    public APIErrorResponseDTO(String error) {
-        super();
-        this.error = error;
-    }
-
 }

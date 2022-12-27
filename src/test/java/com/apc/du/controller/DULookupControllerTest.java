@@ -1,6 +1,7 @@
 package com.apc.du.controller;
 
 import com.apc.du.commons.constants.APIPathConstants;
+import com.apc.du.exceptions.ServiceDisconnectedException;
 import com.apc.du.services.impl.DULookupService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,11 +27,10 @@ class DULookupControllerTest {
     private DULookupService service;
 
     @BeforeEach
-    void setUp() {
-    }
+    void setUp() {}
 
     @Test
-    void getRequirements() throws Exception {
+    void success_getDistributionUtilityByBarangayCityProvince() throws Exception {
         when(service.getDistributionUtility(any(), any(), any(), any())).thenReturn(null);
         mockMvc.perform(
                         get(url() + "/du")
@@ -44,8 +44,38 @@ class DULookupControllerTest {
                 .andReturn();
     }
 
+    @Test
+    void success_getDistributionUtilityWithBarangayCode() throws Exception {
+        when(service.getDistributionUtility(any(), any(), any(), any())).thenReturn(null);
+        mockMvc.perform(
+                        get(url() + "/du")
+                                .param("province","Cebu")
+                                .param("city","Cebu City")
+                                .param("barangay","Adlaon")
+                                .param("barangayCode","CEBADL")
+                                .accept(MediaType.APPLICATION_JSON)
+                                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+    }
+
+    @Test
+    void failure_getDistributionUtility() throws Exception {
+        when(service.getDistributionUtility(any(), any(), any(), any())).thenThrow(ServiceDisconnectedException.class);
+        mockMvc.perform(
+                        get(url() + "/du")
+                                .param("province","asdasd")
+                                .param("city","asdasd")
+                                .param("barangay","err")
+                                .accept(MediaType.APPLICATION_JSON)
+                                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().is4xxClientError())
+                .andReturn();
+    }
+
     private String url() {
         return APIPathConstants.API_VERSION_1 + APIPathConstants.DU_BASE_PATH;
     }
-
 }

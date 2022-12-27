@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class PostalCode extends AuditableEntity {
     @Id
     @GeneratedValue
