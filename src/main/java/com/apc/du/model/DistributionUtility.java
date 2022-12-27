@@ -4,11 +4,9 @@ import com.apc.du.model.base.AuditableEntity;
 import lombok.*;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
-
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "distribution_utility")
@@ -18,6 +16,10 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @ToString
 public class DistributionUtility extends AuditableEntity {
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "code", length = 255)
     private String code;
@@ -26,4 +28,7 @@ public class DistributionUtility extends AuditableEntity {
     @Lob
     @Type(type = "org.hibernate.type.TextType")
     private String description;
+
+    @OneToMany(mappedBy = "distributionUtility", fetch = FetchType.LAZY)
+    public Set<Barangay> barangays = new HashSet<>();
 }

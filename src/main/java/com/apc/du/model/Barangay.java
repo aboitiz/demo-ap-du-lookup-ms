@@ -4,11 +4,7 @@ import com.apc.du.model.base.AuditableEntity;
 import lombok.*;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 
 @Entity
 @Table(name = "barangay")
@@ -18,6 +14,10 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @ToString
 public class Barangay extends AuditableEntity {
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "code", length = 255)
     private String code;
@@ -27,9 +27,11 @@ public class Barangay extends AuditableEntity {
     @Type(type = "org.hibernate.type.TextType")
     private String description;
 
-    @Column(length = 50)
-    private String du;
+    @ManyToOne
+    @JoinColumn(name = "cityId")
+    public City city;
 
-    @Column(name = "city_code", length = 255)
-    private String cityCode;
+    @ManyToOne
+    @JoinColumn(name = "distributionUtilityId")
+    public DistributionUtility distributionUtility;
 }
