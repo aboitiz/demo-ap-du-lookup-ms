@@ -5,6 +5,8 @@ import lombok.*;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "postal_code")
@@ -21,7 +23,10 @@ public class PostalCode extends AuditableEntity {
     @Column(name = "code", length = 255)
     private String code;
 
-    @Column
+    @OneToMany(mappedBy = "postalCode")
+    public Set<City> cities = new HashSet<>();
+
+    @Column(name = "description")
     @Lob
     @Type(type = "org.hibernate.type.TextType")
     private String description;

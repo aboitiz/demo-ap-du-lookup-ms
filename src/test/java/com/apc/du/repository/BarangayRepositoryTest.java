@@ -1,5 +1,6 @@
 package com.apc.du.repository;
 
+import com.apc.du.commons.dto.APIResponseDTO;
 import com.apc.du.commons.dto.DistributionUtilityDTO;
 import com.apc.du.model.Barangay;
 import com.apc.du.model.City;
@@ -37,21 +38,19 @@ class BarangayRepositoryTest {
 
     @Test
     void success_getBarangayByCode() {
-        List<DistributionUtilityDTO> result = repository.getDUByBarangayCode("CEBCADL");
-        DistributionUtilityDTO du = result.get(0);
+        List<APIResponseDTO> result = repository.getDUByBarangayCode("CEBCADL");
         assertThat(result.size()).isNotEqualTo(0);
-        assertThat(du.getCode()).isEqualTo("VECO");
     }
 
     @Test
     void success_getBarangayByProvinceCityBarangay() {
-        List<DistributionUtilityDTO> result = repository.getDUByProvinceCityBarangay("Cebu","Cebu City","Adlaon");
+        List<APIResponseDTO> result = repository.getDUByProvinceCityBarangay("Cebu","Cebu City","Adlaon");
         assertThat(result.size()).isNotEqualTo(0);
     }
 
     @Test
     void failure_getBarangayByCode() {
-        List<DistributionUtilityDTO> result = repository.getDUByBarangayCode("ERR");
+        List<APIResponseDTO> result = repository.getDUByBarangayCode("ERR");
         assertThat(result.size()).isEqualTo(0);
     }
 

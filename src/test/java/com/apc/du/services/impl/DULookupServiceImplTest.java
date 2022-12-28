@@ -1,6 +1,7 @@
 package com.apc.du.services.impl;
 
 import com.apc.commons.response.BaseResponse;
+import com.apc.du.commons.dto.APIResponseDTO;
 import com.apc.du.commons.dto.DistributionUtilityDTO;
 import com.apc.du.commons.enums.APIResponse;
 import com.apc.du.exceptions.ServiceDisconnectedException;
@@ -69,13 +70,22 @@ class DULookupServiceImplTest {
         when(service.getDistributionUtility("CEBU","Cebu City", "Adlaon",null)).thenThrow(new RuntimeException());
     }
 
-    private List<DistributionUtilityDTO> getDu() {
+    private List<APIResponseDTO> getDu() {
+        List<APIResponseDTO> dus = null;
+        APIResponseDTO response = new APIResponseDTO();
+        response.setBarangay("Adlaon");
+        response.setCity("Cebu City");
+        response.setProvince("Cebu");
+        List<DistributionUtilityDTO> duList = new ArrayList<>();
         DistributionUtilityDTO du = new DistributionUtilityDTO();
         du.setId(1L);
         du.setCode("VECO");
-        du.setDescription("Visaya Electric");
-        List<DistributionUtilityDTO> duList = new ArrayList<>();
+        du.setDescription("Visayan Electric");
         duList.add(du);
-        return duList;
+
+        response.setDistributionUtility(du);
+
+        dus.add(response);
+        return dus;
     }
 }

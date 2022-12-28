@@ -32,6 +32,10 @@ public class City extends AuditableEntity {
     @JoinColumn(name = "province_id")
     public Province province;
 
+    @ManyToOne
+    @JoinColumn(name = "postalCode_id")
+    public PostalCode postalCode;
+
     @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
     public Set<Barangay> barangays = new HashSet<>();
 }
