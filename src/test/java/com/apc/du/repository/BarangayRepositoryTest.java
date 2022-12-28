@@ -2,10 +2,7 @@ package com.apc.du.repository;
 
 import com.apc.du.commons.dto.APIResponseDTO;
 import com.apc.du.commons.dto.DistributionUtilityDTO;
-import com.apc.du.model.Barangay;
-import com.apc.du.model.City;
-import com.apc.du.model.DistributionUtility;
-import com.apc.du.model.Province;
+import com.apc.du.model.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,12 +51,16 @@ class BarangayRepositoryTest {
         assertThat(result.size()).isEqualTo(0);
     }
 
+    private PostalCode getPostalCode() {
+        return new PostalCode(1L, "1", new HashSet<>(), "1");
+    }
+
     private Province getProvince() {
         return new Province(1L, "CEB", "CEBU", new HashSet<>());
     }
 
     private City getCity() {
-        return new City(1L, "CEB", "CEBU CITY", getProvince(), new HashSet<>());
+        return new City(1L, "CEB", "CEBU CITY", getProvince(), getPostalCode(), new HashSet<>());
     }
 
     private DistributionUtility getDistributionUtility() {

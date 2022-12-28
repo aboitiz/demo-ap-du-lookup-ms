@@ -4,6 +4,7 @@ import com.apc.du.model.PostalCode;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
+import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,7 +30,7 @@ public class PostalCodeTest {
     void success_allArgs() {
         String code = "6000", description = "6000";
         Long id = 1L;
-        PostalCode postalCode = new PostalCode(id, code, description);
+        PostalCode postalCode = new PostalCode(id, code, new HashSet<>(), description);
 
         assertThat(postalCode.getId()).isNotNull();
         assertThat(postalCode.getCode()).isEqualTo(code);
