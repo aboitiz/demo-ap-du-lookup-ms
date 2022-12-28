@@ -38,5 +38,5 @@
     ('PAQ', 'Paquibato', davsId, CURRENT_TIMESTAMP, NULL),
     ('SFERN', 'San Fernando', cebId, CURRENT_TIMESTAMP, NULL),
     ('STOM', 'Sto Tomas', davnId, CURRENT_TIMESTAMP, NULL),
-    ('TAL', 'Talisay', cebId, CURRENT_TIMESTAMP, NULL);
+    ('TAL', 'Talisay', cebId, CURRENT_TIMESTAMP, NULL) ON CONFLICT (code) DO NOTHING;
  END $$;

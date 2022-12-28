@@ -1,5 +1,5 @@
 
- CREATE TABLE PUBLIC.barangay (
+ CREATE TABLE IF NOT EXISTS PUBLIC.barangay (
     id SERIAL NOT NULL,
     code VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
@@ -876,5 +876,5 @@ BEGIN
         ('TALSANROQ', 'San Roque', vecoId, talId, CURRENT_TIMESTAMP, NULL),
         ('TALTAB', 'Tabunok', vecoId, talId, CURRENT_TIMESTAMP, NULL),
         ('TALTAN', 'Tangke', vecoId, talId, CURRENT_TIMESTAMP, NULL),
-        ('TALTAP', 'Tapol', vecoId, talId, CURRENT_TIMESTAMP, NULL);
+        ('TALTAP', 'Tapol', vecoId, talId, CURRENT_TIMESTAMP, NULL) ON CONFLICT (code, distribution_utility_id, city_id) DO NOTHING;
 END $$;
