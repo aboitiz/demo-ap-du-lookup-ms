@@ -31,15 +31,6 @@ public class DULookupServiceImpl implements DULookupService {
     @Autowired
     private BarangayRepository barangayRepository;
 
-    @Autowired
-    private DistributionUtilityRepository distributionUtilityRepository;
-
-    @Autowired
-    private PostalCodeRepository postalCodeRepository;
-
-    @Autowired
-    private CityRepository cityRepository;
-
     @Override
     public BaseResponse getDistributionUtility(String province, String city, String barangay, String postalCode) throws ServiceDisconnectedException {
         List<APIResponseDTO> duList = new ArrayList<>();

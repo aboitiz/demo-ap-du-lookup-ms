@@ -52,7 +52,7 @@ class DULookupControllerTest {
                                 .param("province","Cebu")
                                 .param("city","Cebu City")
                                 .param("barangay","Adlaon")
-                                .param("barangayCode","CEBADL")
+                                .param("postalCode","6001")
                                 .accept(MediaType.APPLICATION_JSON)
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
