@@ -2,7 +2,7 @@ package com.apc.du.services.impl.impl;
 
 import com.apc.commons.response.BaseResponse;
 import com.apc.du.commons.dto.APIErrorResponseDTO;
-import com.apc.du.commons.dto.DistributionUtilityDTO;
+import com.apc.du.commons.dto.APIResponseDTO;
 import com.apc.du.commons.enums.APIResponse;
 import com.apc.du.exceptions.ServiceDisconnectedException;
 import com.apc.du.repository.BarangayRepository;
@@ -24,7 +24,7 @@ public class DULookupServiceImpl implements DULookupService {
 
     @Override
     public BaseResponse getDistributionUtility(String province, String city, String barangay, String barangayCode) throws ServiceDisconnectedException {
-        List<DistributionUtilityDTO> duList = null;
+        List<APIResponseDTO> duList = null;
         try {
             if (StringUtils.isNotEmpty(barangayCode)) {
                 log.info("========= Fetching by barangayCode");
