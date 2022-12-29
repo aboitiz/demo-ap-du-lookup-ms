@@ -9,6 +9,5 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class DULookupServiceApp {
 	public static void main(String[] args) {
 		SpringApplication.run(DULookupServiceApp.class, args);
-		System.out.print(System.currentTimeMillis());
 	}
 }
