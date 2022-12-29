@@ -16,6 +16,7 @@ import org.mockito.Spy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,9 +36,9 @@ class DULookupServiceImplTest {
     }
 
     @Test
-    void success_getDUByBarangayCode() throws ServiceDisconnectedException {
-        when(barangayRepository.getDUByBarangayCode("CEBCADL")).thenReturn(getDu());
-        BaseResponse response = service.getDistributionUtility("Cebu","Cebu City", "Adlaon","CEBCADL");
+    void success_getDUByBrgyCityProvincePostalCode() throws ServiceDisconnectedException {
+        when(barangayRepository.getDUByProvinceCityBarangayPostalCode("Cebu","Cebu City","Adlaon", "1")).thenReturn(getDu());
+        BaseResponse response = service.getDistributionUtility("Cebu", "Cebu City", "Adlaon", "1");
 
         assertThat(response.getStatusCode()).isEqualTo(String.valueOf(APIResponse.SUCCESS.getCode()));
         assertThat(response.getMessage().toUpperCase()).isEqualTo(APIResponse.SUCCESS.getMessage());
@@ -45,33 +46,29 @@ class DULookupServiceImplTest {
     }
 
     @Test
-    void success_getDUByBrgyCityProvince() throws ServiceDisconnectedException {
-        when(barangayRepository.getDUByProvinceCityBarangay("Cebu","Cebu City","Adlaon")).thenReturn(getDu());
-        BaseResponse response = service.getDistributionUtility("Cebu", "Cebu City", "Adlaon", null);
+    void failure_getDUByBrgyCityProvincePostalCode() throws ServiceDisconnectedException {
+        when(barangayRepository.getDUByProvinceCityBarangayPostalCode("Cebu","Cebu City","Adlaon", "1")).thenReturn(new ArrayList<>());
+        BaseResponse response = service.getDistributionUtility("Cebu", "Cebu City", "Adlaon", "1");
 
-        assertThat(response.getStatusCode()).isEqualTo(String.valueOf(APIResponse.SUCCESS.getCode()));
-        assertThat(response.getMessage().toUpperCase()).isEqualTo(APIResponse.SUCCESS.getMessage());
-        assertThat(response.getData()).isNotNull();
+        assertThat(response.getStatusCode()).isEqualTo(String.valueOf(APIResponse.APPLICATION_STATUS_NOT_FOUND.getCode()));
+        assertThat(response.getDataList().size()).isEqualTo(0);
     }
 
     @Test
-    void failure_404_getDistributionUtility() throws ServiceDisconnectedException {
-        when(barangayRepository.getDUByBarangayCode("CEBCADL")).thenReturn(null);
-        BaseResponse response = service.getDistributionUtility("Cebu", "Cebu City", "Adlaon", null);
+    void failure_throw_exception() throws ServiceDisconnectedException  {
+        BaseResponse response = null;
+        try {
+            when(barangayRepository.getDUByProvinceCityBarangayPostalCode("asd","asdasd", "asdasd", "asd")).thenThrow(Exception.class);
+            service.getDistributionUtility("Cebu", "Cebu City", "Adlaon", "1");
+        } catch (Exception e) {
+            System.out.print("RESPONSE >>> " + e.getMessage());
 
-        assertThat(response.getStatusCode().toString()).isEqualTo(String.valueOf(APIResponse.APPLICATION_STATUS_NOT_FOUND.getCode()));
-        assertThat(response.getMessage()).isEqualTo("Resource Not Found");
-        assertThat(response.getData()).isNotNull();
-    }
 
-    @Test
-    void failure_exception_getDistributionUtility() throws ServiceDisconnectedException {
-        when(barangayRepository.getDUByBarangayCode("CEBCADL")).thenThrow(new RuntimeException());
-        when(service.getDistributionUtility("CEBU","Cebu City", "Adlaon",null)).thenThrow(new RuntimeException());
+        }
     }
 
     private List<APIResponseDTO> getDu() {
-        List<APIResponseDTO> dus = null;
+        List<APIResponseDTO> dus = new ArrayList<>();
         APIResponseDTO response = new APIResponseDTO();
         response.setBarangay("Adlaon");
         response.setCity("Cebu City");

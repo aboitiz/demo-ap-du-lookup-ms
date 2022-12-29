@@ -21,34 +21,30 @@ import static org.assertj.core.api.Assertions.assertThat;
 class BarangayRepositoryTest {
 
     @Autowired
-    private BarangayRepository repository;
+    private BarangayRepository barangayRepository;
+
+    @Autowired
+    private PostalCodeRepository postalCodeRepository;
+
+    @Autowired
+    private CityRepository cityRepository;
 
     @BeforeEach
     void setUp() {
-        repository.save(getBarangay().get(0));
+        postalCodeRepository.save(getPostalCode());
+        barangayRepository.save(getBarangay().get(0));
     }
 
     @AfterEach
     void tearDown() {
-        repository.delete(getBarangay().get(0));
-    }
-
-    @Test
-    void success_getBarangayByCode() {
-        List<APIResponseDTO> result = repository.getDUByBarangayCode("CEBCADL");
-        assertThat(result.size()).isNotEqualTo(0);
+        postalCodeRepository.delete(getPostalCode());
+        barangayRepository.delete(getBarangay().get(0));
     }
 
     @Test
     void success_getBarangayByProvinceCityBarangay() {
-        List<APIResponseDTO> result = repository.getDUByProvinceCityBarangay("Cebu","Cebu City","Adlaon");
+        List<APIResponseDTO> result = barangayRepository.getDUByProvinceCityBarangayPostalCode("Cebu","Cebu City","Adlaon", "1");
         assertThat(result.size()).isNotEqualTo(0);
-    }
-
-    @Test
-    void failure_getBarangayByCode() {
-        List<APIResponseDTO> result = repository.getDUByBarangayCode("ERR");
-        assertThat(result.size()).isEqualTo(0);
     }
 
     private PostalCode getPostalCode() {
