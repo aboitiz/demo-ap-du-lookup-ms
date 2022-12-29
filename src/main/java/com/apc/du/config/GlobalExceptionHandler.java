@@ -45,11 +45,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      */
     protected ResponseEntity<BaseResponse<?>> buildErrorResponse(String statusCode, APIResponse apiResponse,
                                                                  HttpServletRequest httpReq, HttpStatus httpStatus) {
-
         BaseResponse<APIErrorResponseDTO> errResponse = new BaseResponse<>();
-
         try {
-
             errResponse.setTimestamp(getTimestamp());
             errResponse.setStatusCode(statusCode);
             errResponse.setMessage(apiResponse.getMessage());

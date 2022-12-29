@@ -56,7 +56,7 @@ class BarangayRepositoryTest {
     }
 
     private City getCity() {
-        return new City(1L, "CEB", "CEBU CITY", getProvince(), getPostalCode(), new HashSet<>());
+        return new City(1L, "CEB", "CEBU CITY", getProvince(), getPostalCode(), new ArrayList<>());
     }
 
     private DistributionUtility getDistributionUtility() {
