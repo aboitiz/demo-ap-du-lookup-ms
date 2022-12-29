@@ -48,7 +48,7 @@ class BarangayRepositoryTest {
     }
 
     private PostalCode getPostalCode() {
-        return new PostalCode(1L, "1", new HashSet<>(), "1");
+        return new PostalCode(1L, "1", "1", new HashSet<>());
     }
 
     private Province getProvince() {

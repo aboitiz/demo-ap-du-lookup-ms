@@ -37,7 +37,7 @@ public class DULookupServiceImpl implements DULookupService {
             log.error("Exception occurred while fetching all DU. Message: {}", e.getMessage());
             throw new ServiceDisconnectedException(APIResponse.SERVICE_DISCONNECTED.toString(), HttpStatus.REQUEST_TIMEOUT);
         }
-
+        
         return new BaseResponse(duList);
     }
 

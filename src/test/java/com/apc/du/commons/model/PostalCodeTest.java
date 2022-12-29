@@ -30,7 +30,7 @@ public class PostalCodeTest {
     void success_allArgs() {
         String code = "6000", description = "6000";
         Long id = 1L;
-        PostalCode postalCode = new PostalCode(id, code, new HashSet<>(), description);
+        PostalCode postalCode = new PostalCode(id, code, description, new HashSet<>());
 
         assertThat(postalCode.getId()).isNotNull();
         assertThat(postalCode.getCode()).isEqualTo(code);
