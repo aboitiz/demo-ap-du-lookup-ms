@@ -54,19 +54,6 @@ class DULookupServiceImplTest {
         assertThat(response.getDataList().size()).isEqualTo(0);
     }
 
-    @Test
-    void failure_throw_exception() throws ServiceDisconnectedException  {
-        BaseResponse response = null;
-        try {
-            when(barangayRepository.getDUByProvinceCityBarangayPostalCode("asd","asdasd", "asdasd", "asd")).thenThrow(Exception.class);
-            service.getDistributionUtility("Cebu", "Cebu City", "Adlaon", "1");
-        } catch (Exception e) {
-            System.out.print("RESPONSE >>> " + e.getMessage());
-
-
-        }
-    }
-
     private List<APIResponseDTO> getDu() {
         List<APIResponseDTO> dus = new ArrayList<>();
         APIResponseDTO response = new APIResponseDTO();

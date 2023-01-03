@@ -23,11 +23,11 @@ public class PostalCode extends AuditableEntity {
     @Column(name = "code", length = 255)
     private String code;
 
-    @OneToMany(mappedBy = "postalCode")
-    public Set<City> cities = new HashSet<>();
-
     @Column(name = "description")
     @Lob
     @Type(type = "org.hibernate.type.TextType")
     private String description;
+
+    @OneToMany(mappedBy = "postalCode")
+    public Set<City> cities = new HashSet<>();
 }

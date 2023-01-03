@@ -15,14 +15,23 @@ configurations {
     }
 }
 
+//repositories {
+//    mavenCentral()
+//    mavenLocal()
+//}
+
 repositories {
-    mavenCentral()
-    mavenLocal()
+    maven {
+        url "$repository"
+        credentials {
+            username "$mavenUser"
+            password "$mavenPassword"
+        }
+    }
 }
 
-
 dependencies {
-    implementation 'com.apc.commons:ap-commons-ms:0.0.1-SNAPSHOT'
+    implementation 'com.apc.commons:ap-commons-ms:0.0.1'
 
     implementation 'org.springframework.boot:spring-boot-starter-data-rest'
     // implementation 'org.springframework.boot:spring-boot-starter-security'

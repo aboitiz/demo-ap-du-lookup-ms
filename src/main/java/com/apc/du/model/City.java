@@ -5,8 +5,8 @@ import lombok.*;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "city")
@@ -37,5 +37,5 @@ public class City extends AuditableEntity {
     public PostalCode postalCode;
 
     @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
-    public Set<Barangay> barangays = new HashSet<>();
+    public List<Barangay> barangays = new ArrayList<>();
 }

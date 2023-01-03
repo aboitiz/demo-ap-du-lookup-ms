@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface BarangayRepository extends JpaRepository<Barangay, Long> {
-    @Query(value = "SELECT NEW com.apc.du.commons.dto.APIResponseDTO(p.description, c.description, b.description, du.id, du.code, du.description)" +
+    @Query(value = "SELECT NEW com.apc.du.commons.dto.APIResponseDTO(p.description, c.description, pc.code, b.description, du.id, du.code, du.description)" +
             " FROM Barangay AS b" +
             " JOIN City AS c ON b.city.id = c.id" +
             " JOIN Province AS p ON c.province.id = p.id" +
