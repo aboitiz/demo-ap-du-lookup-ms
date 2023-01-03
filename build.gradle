@@ -123,14 +123,14 @@ jacocoTestCoverageVerification {
         rule {
             element = 'CLASS'
             excludes = [
-                    'com.apc.inquiry.exceptions.*',
-                    'com.apc.inquiry.commons.*',
-                    'com.apc.inquiry.model.*',
-                    'com.apc.inquiry.config.SwaggerConfiguration',
-                    'com.apc.inquiry.ServiceInquiryApp'
+                    'com.apc.du.exceptions.*',
+                    'com.apc.du.commons.*',
+                    'com.apc.du.model.*',
+                    'com.apc.du.config.SwaggerConfiguration',
+                    'com.apc.du.DULookupServiceApp'
             ]
             limit {
-                minimum = 0.00
+                minimum = 0.90
             }
         }
     }
@@ -142,7 +142,6 @@ jacoco {
     toolVersion = "0.8.8"
     reportsDirectory = layout.buildDirectory.dir('jacocoReport')
 }
-
 
 sonarqube {
     properties {
