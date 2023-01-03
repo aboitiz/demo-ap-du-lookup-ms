@@ -104,10 +104,7 @@ static def buildTimestamp() {
 
 tasks.named('test') {
     useJUnitPlatform()
-    reports {
-        xml.enabled true
-        csv.enabled true
-    }
+    finalizedBy jacocoTestReport
 }
 
 jacocoTestReport {
