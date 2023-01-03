@@ -1,0 +1,21 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  name: {{oc_app_name}}
+  namespace: {{oc_project}}
+spec:
+  triggers: []
+  replicas: 1
+  selector:
+    deploymentConfig: {{oc_app_name}}
+    name: {{oc_app_name}}
+  template:
+    metadata:
+      labels:
+        deploymentConfig: {{oc_app_name}}
+        name: {{oc_app_name}}
+    spec:
+      containers:
+        - name: {{oc_app_name}}
+          image: {{oc_app_repo}}/{{oc_project}}/{{oc_app_name}}:latest
+          resources: {}
