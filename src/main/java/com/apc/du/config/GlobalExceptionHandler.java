@@ -22,11 +22,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
      * Generates timestamp of error log
-     *x
+     *
      * @return
      * @throws APException
      */
-    protected String getTimestamp() {
+    protected String getTimestamp() throws APException {
 
         /**
          * SET format and timezone to default;
@@ -46,10 +46,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<BaseResponse<?>> buildErrorResponse(String statusCode, APIResponse apiResponse,
                                                                  HttpServletRequest httpReq, HttpStatus httpStatus) {
         BaseResponse<APIErrorResponseDTO> errResponse = new BaseResponse<>();
-        errResponse.setTimestamp(getTimestamp());
-        errResponse.setStatusCode(statusCode);
-        errResponse.setMessage(apiResponse.getMessage());
-        errResponse.setData(APIErrorResponseDTO.builder().error(apiResponse.getDescription()).build());
+        try {
+            errResponse.setTimestamp(getTimestamp());
+            errResponse.setStatusCode(statusCode);
+            errResponse.setMessage(apiResponse.getMessage());
+            errResponse.setData(APIErrorResponseDTO.builder().error(apiResponse.getDescription()).build());
+        } catch (APException e) {
+            log.debug(e.getMessage(), e);
+            buildErrorResponse(String.valueOf(apiResponse.getCode()), apiResponse, httpReq, httpStatus);
+        }
+
         return new ResponseEntity<>(errResponse, httpStatus);
     }
 
