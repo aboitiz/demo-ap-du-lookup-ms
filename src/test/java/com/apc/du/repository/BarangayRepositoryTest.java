@@ -1,7 +1,6 @@
 package com.apc.du.repository;
 
 import com.apc.du.commons.dto.APIResponseDTO;
-import com.apc.du.commons.dto.DistributionUtilityDTO;
 import com.apc.du.model.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
