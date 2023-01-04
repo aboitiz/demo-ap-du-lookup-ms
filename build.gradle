@@ -61,7 +61,7 @@ dependencies {
     liquibaseRuntime sourceSets.getByName("main").compileClasspath
     liquibaseRuntime sourceSets.getByName("main").runtimeClasspath
     liquibaseRuntime sourceSets.getByName("main").output
-    implementation 'net.lbruun.springboot:preliquibase-spring-boot-starter:1.2.1'
+//    implementation 'net.lbruun.springboot:preliquibase-spring-boot-starter:1.2.1'
 }
 
 Properties props = new Properties()
