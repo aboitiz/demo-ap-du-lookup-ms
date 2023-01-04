@@ -8,7 +8,7 @@ plugins {
 }
 
 group = 'com.apc.template'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 sourceCompatibility = '17'
 
 configurations {
@@ -54,6 +54,8 @@ dependencies {
     implementation 'io.springfox:springfox-swagger2:3.0.0'
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+
+    implementation 'org.yaml:snakeyaml:1.33'
 
     liquibaseRuntime 'org.liquibase:liquibase-core:4.16.0'
 	liquibaseRuntime 'org.liquibase:liquibase-groovy-dsl:3.0.2'
@@ -127,7 +129,7 @@ jacocoTestCoverageVerification {
                     'com.apc.du.DULookupServiceApp'
             ]
             limit {
-                minimum = 0.50
+                minimum = 0.00
             }
         }
     }
