@@ -21,7 +21,6 @@ configurations {
 //    mavenCentral()
 //    mavenLocal()
 //}
-
 repositories {
     maven {
         url "$repository"
@@ -129,7 +128,7 @@ jacocoTestCoverageVerification {
                     'com.apc.du.DULookupServiceApp'
             ]
             limit {
-                minimum = 0.00
+                minimum = 0.90
             }
         }
     }
