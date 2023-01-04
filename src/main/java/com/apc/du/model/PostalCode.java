@@ -14,6 +14,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class PostalCode extends AuditableEntity {
     @Id
     @GeneratedValue

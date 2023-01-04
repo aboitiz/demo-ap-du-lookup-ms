@@ -34,6 +34,13 @@ class BarangayRepositoryTest {
         barangayRepository.save(getBarangay().get(0));
     }
 
+    @Test
+    void contextLoads() {
+        assertThat(cityRepository).isNotNull();
+        assertThat(postalCodeRepository).isNotNull();
+        assertThat(barangayRepository).isNotNull();
+    }
+
     @AfterEach
     void tearDown() {
         postalCodeRepository.delete(getPostalCode());
@@ -47,19 +54,41 @@ class BarangayRepositoryTest {
     }
 
     private PostalCode getPostalCode() {
-        return new PostalCode(1L, "1", "1", new HashSet<>());
+        return PostalCode.builder()
+                .id(1L)
+                .code("1")
+                .description("1")
+                .cities(new HashSet<>())
+                .build();
     }
 
     private Province getProvince() {
-        return new Province(1L, "CEB", "CEBU", new HashSet<>());
+        return Province.builder()
+                .id(1L)
+                .code("CEB")
+                .description("CEBU")
+                .cities(new HashSet<>())
+                .build();
     }
 
     private City getCity() {
-        return new City(1L, "CEB", "CEBU CITY", getProvince(), getPostalCode(), new ArrayList<>());
+        return City.builder()
+                .id(1L)
+                .code("CEB")
+                .description("CEBU CITY")
+                .province(getProvince())
+                .postalCode(getPostalCode())
+                .barangays(new ArrayList<>())
+                .build();
     }
 
     private DistributionUtility getDistributionUtility() {
-        return new DistributionUtility(1L, "VECO", "Visayan Electric", new HashSet<>());
+        return DistributionUtility.builder()
+                .id(1L)
+                .code("VECO")
+                .description("Visayan Electric")
+                .barangays(new HashSet<>())
+                .build();
     }
 
     private List<Barangay> getBarangay() {
