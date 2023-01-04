@@ -14,7 +14,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class DistributionUtility extends AuditableEntity {
     @Id
     @GeneratedValue

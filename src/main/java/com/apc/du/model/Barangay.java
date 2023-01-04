@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Barangay extends AuditableEntity {
     @Id
     @GeneratedValue
