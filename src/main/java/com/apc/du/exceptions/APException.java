@@ -14,12 +14,6 @@ public class APException extends Exception {
     private final String code;
     private final HttpStatus httpStatus;
 
-    public APException(String message, HttpStatus httpStatus) {
-        super(message);
-        this.httpStatus = httpStatus;
-        code = null;
-    }
-
     public APException(String code, String message, HttpStatus httpStatus) {
         super(message);
         this.code = code;
