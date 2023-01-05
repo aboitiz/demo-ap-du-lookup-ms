@@ -43,7 +43,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      * @param httpStatus
      * @return
      */
-    protected ResponseEntity<BaseResponse<?>> buildErrorResponse(String statusCode, APIResponse apiResponse,
+    protected ResponseEntity<BaseResponse> buildErrorResponse(String statusCode, APIResponse apiResponse,
                                                                  HttpServletRequest httpReq, HttpStatus httpStatus) {
         BaseResponse<APIErrorResponseDTO> errResponse = new BaseResponse<>();
         try {
@@ -67,7 +67,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      * @return
      */
     @ExceptionHandler(APException.class)
-    public ResponseEntity<BaseResponse<?>> handleUnexpectedException(Exception ex, HttpServletRequest httpReq) {
+    public ResponseEntity<BaseResponse> handleUnexpectedException(Exception ex, HttpServletRequest httpReq) {
         log.error(APIResponse.GENERAL_DECLINE.getDescription(), ex);
         return buildErrorResponse(String.valueOf(APIResponse.GENERAL_DECLINE.getCode()), APIResponse.GENERAL_DECLINE,
                 httpReq, HttpStatus.BAD_REQUEST);
@@ -80,7 +80,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      * @return
      */
     @ExceptionHandler(ServiceDisconnectedException.class)
-    public ResponseEntity<BaseResponse<?>> handleServiceDisconnectedException(Exception ex, HttpServletRequest httpReq) {
+    public ResponseEntity<BaseResponse> handleServiceDisconnectedException(Exception ex, HttpServletRequest httpReq) {
         log.error(APIResponse.SERVICE_DISCONNECTED.getDescription(), ex);
         return buildErrorResponse(String.valueOf(APIResponse.SERVICE_DISCONNECTED.getCode()),
                 APIResponse.SERVICE_DISCONNECTED, httpReq, HttpStatus.REQUEST_TIMEOUT);

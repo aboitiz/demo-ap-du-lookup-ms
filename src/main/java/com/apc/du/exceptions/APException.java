@@ -22,7 +22,6 @@ public class APException extends Exception {
     public APException(String code, String message, HttpStatus httpStatus) {
         super(message);
         this.code = code;
-        this.httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        this.httpStatus = httpStatus;
     }
-
 }
