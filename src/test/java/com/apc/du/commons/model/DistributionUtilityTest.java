@@ -42,7 +42,7 @@ class DistributionUtilityTest {
         du2.setCode(code);
         du2.setDescription(description);
 
-        assertThat(du.equals(du2));
-        assertThat(du.hashCode() == du2.hashCode());
+        assertThat(du.equals(du2)).isTrue();
+        assertThat(du.hashCode()).isEqualTo(du2.hashCode());
     }
 }

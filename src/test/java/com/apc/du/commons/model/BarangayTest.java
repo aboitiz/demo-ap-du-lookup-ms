@@ -46,8 +46,8 @@ class BarangayTest {
         brgy2.setCode(code);
         brgy2.setDescription(description);
 
-        assertThat(brgy.equals(brgy2));
-        assertThat(brgy.hashCode() == brgy2.hashCode());
+        assertThat(brgy.equals(brgy2)).isTrue();
+        assertThat(brgy.hashCode()).isEqualTo(brgy2.hashCode());
     }
 
     private Province getProvince(String code, String description) {

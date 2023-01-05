@@ -46,8 +46,8 @@ class CityTest {
         city.setCode(code);
         city.setDescription(description);
 
-        assertThat(city.equals(city2));
-        assertThat(city.hashCode() == city2.hashCode());
+        assertThat(city.equals(city2)).isTrue();
+        assertThat(city.hashCode()).isEqualTo(city2.hashCode());
     }
 
     private Province getProvince(String code, String description) {

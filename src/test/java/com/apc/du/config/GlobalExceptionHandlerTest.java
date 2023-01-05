@@ -62,7 +62,7 @@ class GlobalExceptionHandlerTest {
         when(handler.buildErrorResponse(STATUS, APIResponse.SUCCESS, httpServletRequest, HttpStatus.OK))
                 .thenReturn(null);
         assertThat(handler.buildErrorResponse(STATUS, APIResponse.SUCCESS, httpServletRequest, HttpStatus.OK))
-                .isEqualTo(null);
+                .isNull();
     }
 
 

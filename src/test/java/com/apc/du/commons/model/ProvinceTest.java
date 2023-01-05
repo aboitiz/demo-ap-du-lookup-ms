@@ -41,7 +41,7 @@ class ProvinceTest {
         province2.setCode(code);
         province2.setDescription(description);
 
-        assertThat(province.equals(province2));
-        assertThat(province.hashCode() == province2.hashCode());
+        assertThat(province.equals(province2)).isTrue();
+        assertThat(province.hashCode()).isEqualTo(province2.hashCode());
     }
 }
