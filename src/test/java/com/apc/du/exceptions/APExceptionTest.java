@@ -19,7 +19,7 @@ import java.util.Map;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class APExceptionTest {
+class APExceptionTest {
     @Spy
     @InjectMocks
     private GlobalExceptionHandler handler;
