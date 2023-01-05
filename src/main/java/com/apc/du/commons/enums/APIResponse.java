@@ -14,10 +14,12 @@ public enum APIResponse {
     private final int code;
     private final String message;
     private final String description;
+    private final String error;
 
     APIResponse(int code, String error, String message, String description){
         this.code = code;
         this.message = message;
         this.description = description;
+        this.error = error;
     }
 }

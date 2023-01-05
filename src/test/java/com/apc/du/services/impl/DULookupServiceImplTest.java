@@ -51,7 +51,7 @@ class DULookupServiceImplTest {
         BaseResponse response = service.getDistributionUtility("Cebu", "Cebu City", "Adlaon", "1");
 
         assertThat(response.getStatusCode()).isEqualTo(String.valueOf(APIResponse.APPLICATION_STATUS_NOT_FOUND.getCode()));
-        assertThat(response.getDataList().size()).isZero();
+        assertThat(response.getDataList().isEmpty()).isTrue();
     }
 
     private List<APIResponseDTO> getDu() {
