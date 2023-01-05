@@ -65,9 +65,16 @@ class GlobalExceptionHandlerTest {
                 .isNull();
     }
 
+    @Test
+    void handleUnexpectedExceptionAPException() {
+        APException exception = new APException(ERROR, HttpStatus.CONFLICT);
+        ResponseEntity<?> response =
+                handler.handleUnexpectedException(exception, httpServletRequest);
+        assertThat(response.getBody()).isExactlyInstanceOf(BaseResponse.class);
+    }
 
     @Test
-    void handleUnexpectedExceptionAPException1() throws APException {
+    void handleUnexpectedExceptionAPException1() {
         APException exception = new APException(ERROR, MESSAGE, HttpStatus.CONFLICT);
         ResponseEntity<?> response =
                 handler.handleUnexpectedException(exception, httpServletRequest);
