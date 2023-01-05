@@ -1,6 +1,6 @@
 {
     "BaseUrl": {
-        "baseUrl": "https://ap-du-lookup-ms-csgsofa-81-dulookup.apps.qa-sofastaging.aboitizpower.org:8080"
+        "baseUrl": "https://ap-du-lookup-ms-csgsofa-81-dulookup.apps.qa-sofastaging.aboitizpower.org"
     },
     "GETRequestVECO": {
         "endpoint": "/v1/api/du-lookup/du?barangay=Uling&city=Naga%20City&postalCode=6037&province=CEBU",
