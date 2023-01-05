@@ -24,7 +24,7 @@ public class DULookupController {
     private DULookupService dULookupService;
 
     @GetMapping("/du")
-    public BaseResponse<APIErrorResponseDTO> getDistributionUtility(
+    public BaseResponse getDistributionUtility(
         @RequestParam String province,
         @RequestParam String city,
         @RequestParam String barangay,
