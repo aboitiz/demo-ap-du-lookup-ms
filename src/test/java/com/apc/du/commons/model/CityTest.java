@@ -43,8 +43,8 @@ class CityTest {
         city.setDescription(description);
 
         City city2 = new City();
-        city.setCode(code);
-        city.setDescription(description);
+        city2.setCode(code);
+        city2.setDescription(description);
 
         assertThat(city.equals(city2)).isTrue();
         assertThat(city.hashCode()).hasSameHashCodeAs(city2.hashCode());
