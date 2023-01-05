@@ -7,7 +7,7 @@ import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CityTest {
+class CityTest {
     @Test
     void success() {
         String code = "CEB", description = "Cebu";
@@ -26,7 +26,6 @@ public class CityTest {
         List<Barangay> brgys = getBarangays(city);
         city.setBarangays(brgys);
 
-        assertThat(city.getId()).isNotNull();
         assertThat(city.getCode()).isEqualTo(code);
         assertThat(city.getDescription()).isEqualTo(description);
         assertThat(city.getProvince().getCode()).isEqualTo(province.getCode());
@@ -37,22 +36,22 @@ public class CityTest {
     }
 
     private Province getProvince(String code, String description) {
-        return new Province(1L, code, description, new HashSet<City>());
+        return new Province(code, description, new HashSet<City>());
     }
 
     private PostalCode getPostalCode(String code, String description) {
-        return new PostalCode(1L, code, description, new HashSet<>());
+        return new PostalCode(code, description, new HashSet<>());
     }
 
     private List<Barangay> getBarangays(City city) {
         List<Barangay> brgys = new ArrayList<>();
-        Barangay brgy = new Barangay(1L, "CEBADL", "Adlaon", city, new DistributionUtility());
+        Barangay brgy = new Barangay("CEBADL", "Adlaon", city, new DistributionUtility());
         brgys.add(brgy);
 
         return brgys;
     }
 
     private DistributionUtility getDistributionUtility(String code, String description) {
-        return new DistributionUtility(1L, code, description, new HashSet<>());
+        return new DistributionUtility(code, description, new HashSet<>());
     }
 }

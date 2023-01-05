@@ -9,7 +9,7 @@ import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PostalCodeTest {
+class PostalCodeTest {
 
     @Test
     void success() {
@@ -35,16 +35,14 @@ public class PostalCodeTest {
     @Test
     void success_allArgs() {
         String code = "6000", description = "6000";
-        Long id = 1L;
-        PostalCode postalCode = new PostalCode(id, code, description, new HashSet<>());
+        PostalCode postalCode = new PostalCode(code, description, new HashSet<>());
 
-        assertThat(postalCode.getId()).isNotNull();
         assertThat(postalCode.getCode()).isEqualTo(code);
         assertThat(postalCode.getDescription()).isEqualTo(description);
     }
 
     private Set<City> getCities() {
-        City city = new City(1L, "CEB", "CEBU", new Province(), new PostalCode(), new ArrayList<>());
+        City city = new City("CEB", "CEBU", new Province(), new PostalCode(), new ArrayList<>());
         Set<City> cities = new HashSet<>();
         cities.add(city);
 

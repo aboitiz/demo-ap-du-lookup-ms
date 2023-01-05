@@ -12,12 +12,8 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Barangay extends AuditableEntity {
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private Long id;
-
     @Column(name = "code", length = 255)
     private String code;
 

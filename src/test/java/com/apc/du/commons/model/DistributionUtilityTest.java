@@ -10,7 +10,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DistributionUtilityTest {
+class DistributionUtilityTest {
     @Test
     void success() {
         String code = "VECO", description = "Visayan Electric";
@@ -24,7 +24,6 @@ public class DistributionUtilityTest {
         du.setModifiedAt(null);
         du.setBarangays(brgys);
 
-        assertThat(du.getId()).isNotNull();
         assertThat(du.getCode()).isEqualTo(code);
         assertThat(du.getDescription()).isEqualTo(description);
         assertThat(du.getCreatedAt()).isInstanceOf(Date.class);

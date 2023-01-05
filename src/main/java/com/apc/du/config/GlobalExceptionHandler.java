@@ -86,5 +86,4 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 APIResponse.SERVICE_DISCONNECTED, httpReq, HttpStatus.REQUEST_TIMEOUT);
 
     }
-
 }

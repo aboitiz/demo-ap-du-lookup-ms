@@ -30,7 +30,7 @@ public class DULookupServiceImpl implements DULookupService {
             duList = barangayRepository.getDUByProvinceCityBarangayPostalCode(province, city, barangay, postalCode);
             log.info("========== All DU fetched successfully. Size : {}", duList);
 
-            if (duList.size() == 0) {
+            if (duList.isEmpty()) {
                 return errorResponse();
             }
         } catch (Exception e) {

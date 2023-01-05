@@ -14,12 +14,8 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class DistributionUtility extends AuditableEntity {
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private Long id;
-
     @Column(name = "code", length = 255)
     private String code;
 
@@ -29,5 +25,5 @@ public class DistributionUtility extends AuditableEntity {
     private String description;
 
     @OneToMany(mappedBy = "distributionUtility", fetch = FetchType.LAZY)
-    public Set<Barangay> barangays = new HashSet<>();
+    private Set<Barangay> barangays = new HashSet<>();
 }

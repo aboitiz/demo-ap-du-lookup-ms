@@ -3,7 +3,7 @@ package com.apc.du.commons.dto;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class APIResponseDTOTest {
+class APIResponseDTOTest {
     @Test
     void success_apiResponseDTO() {
         String province = "Cebu", city = "Carmen", barangay = "Alejal", postalCode = "8101";

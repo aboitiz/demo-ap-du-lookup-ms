@@ -3,7 +3,7 @@ package com.apc.du.commons.dto;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DistributionUtilityDTOTest {
+class DistributionUtilityDTOTest {
     @Test
     void success_createDto() {
         String code = "VECO", description = "Visayan Electric";

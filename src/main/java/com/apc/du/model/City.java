@@ -14,12 +14,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class City extends AuditableEntity {
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private Long id;
-
     @Column(name = "code", length = 255)
     private String code;
 
@@ -37,5 +33,5 @@ public class City extends AuditableEntity {
     public PostalCode postalCode;
 
     @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
-    public List<Barangay> barangays = new ArrayList<>();
+    private List<Barangay> barangays = new ArrayList<>();
 }

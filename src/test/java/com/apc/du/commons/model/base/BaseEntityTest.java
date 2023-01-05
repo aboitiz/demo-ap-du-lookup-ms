@@ -7,7 +7,7 @@ import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BaseEntityTest {
+class BaseEntityTest {
     @Test
     void success() {
         Long id = 1L;

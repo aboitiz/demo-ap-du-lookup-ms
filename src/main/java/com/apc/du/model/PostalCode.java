@@ -14,12 +14,8 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class PostalCode extends AuditableEntity {
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private Long id;
-
     @Column(name = "code", length = 255)
     private String code;
 
@@ -29,5 +25,5 @@ public class PostalCode extends AuditableEntity {
     private String description;
 
     @OneToMany(mappedBy = "postalCode")
-    public Set<City> cities = new HashSet<>();
+    private Set<City> cities = new HashSet<>();
 }

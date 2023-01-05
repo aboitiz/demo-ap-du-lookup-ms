@@ -10,7 +10,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ProvinceTest {
+class ProvinceTest {
     @Test
     void success() {
         String code = "CEB", description = "Cebu City";
@@ -24,7 +24,6 @@ public class ProvinceTest {
         province.setModifiedAt(null);
         province.setCities(cities);
 
-        assertThat(province.getId()).isNotNull();
         assertThat(province.getCode()).isEqualTo(code);
         assertThat(province.getDescription()).isEqualTo(description);
         assertThat(province.getCreatedAt()).isInstanceOf(Date.class);

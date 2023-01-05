@@ -3,7 +3,7 @@ package com.apc.du.commons.dto;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class APIErrorResponseDTOTest {
+class APIErrorResponseDTOTest {
     @Test
     void success_apiErrorResponseDTO() {
         APIErrorResponseDTO dto = new APIErrorResponseDTO();
