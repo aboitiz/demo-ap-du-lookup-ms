@@ -14,7 +14,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 public class Province extends AuditableEntity {
     @Column(name = "code", length = 255)
     private String code;

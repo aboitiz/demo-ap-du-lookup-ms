@@ -14,7 +14,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 public class City extends AuditableEntity {
     @Column(name = "code", length = 255)
     private String code;
