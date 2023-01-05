@@ -66,6 +66,14 @@ class GlobalExceptionHandlerTest {
     }
 
     @Test
+    void handleUnexpectedExceptionAPException1() {
+        APException exception = new APException(ERROR, MESSAGE, HttpStatus.CONFLICT);
+        ResponseEntity<?> response =
+                handler.handleUnexpectedException(exception, httpServletRequest);
+        assertThat(response.getBody()).isExactlyInstanceOf(BaseResponse.class);
+    }
+
+    @Test
     void handleServiceDisconnectedException() {
         ServiceDisconnectedException serviceDisconnectedException = new ServiceDisconnectedException("ERROR",HttpStatus.CONFLICT);
         ResponseEntity<?> response =
@@ -80,5 +88,6 @@ class GlobalExceptionHandlerTest {
         ResponseEntity<?> response =
                 handler.handleServiceDisconnectedException(serviceDisconnectedException, httpServletRequest);
         assertThat(response.getBody()).isExactlyInstanceOf(BaseResponse.class);
+
     }
 }
