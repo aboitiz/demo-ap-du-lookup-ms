@@ -23,7 +23,7 @@ public class DULookupServiceImpl implements DULookupService {
     private BarangayRepository barangayRepository;
 
     @Override
-    public BaseResponse<APIErrorResponseDTO> getDistributionUtility(String province, String city, String barangay, String postalCode) throws ServiceDisconnectedException {
+    public BaseResponse getDistributionUtility(String province, String city, String barangay, String postalCode) throws ServiceDisconnectedException {
         List<APIResponseDTO> duList = new ArrayList<>();
         try {
             city = city.trim();
@@ -40,6 +40,7 @@ public class DULookupServiceImpl implements DULookupService {
         
         return new BaseResponse(duList);
     }
+
 
     private BaseResponse<APIErrorResponseDTO> errorResponse() {
         BaseResponse<APIErrorResponseDTO> err = new BaseResponse<>();
