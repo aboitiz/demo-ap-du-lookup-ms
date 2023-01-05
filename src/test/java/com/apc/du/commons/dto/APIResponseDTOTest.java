@@ -22,4 +22,18 @@ class APIResponseDTOTest {
         assertThat(dto.getDistributionUtility().getCode()).isEqualTo(duDTO.getCode());
         assertThat(dto.getDistributionUtility().getDescription()).isEqualTo(duDTO.getDescription());
     }
+
+    @Test
+    void success_allArgsConstructor() {
+        String province = "Cebu", city = "Carmen", barangay = "Alejal", postalCode = "8101";
+        DistributionUtilityDTO duDTO = new DistributionUtilityDTO(1L, "VECO", "Visayan Electric");
+        APIResponseDTO dto = new APIResponseDTO(province, city, postalCode, barangay, 1L, duDTO.getCode(), duDTO.getDescription());
+
+        assertThat(dto.getProvince()).isEqualTo(province);
+        assertThat(dto.getCity()).isEqualTo(city);
+        assertThat(dto.getBarangay()).isEqualTo(barangay);
+        assertThat(dto.getPostalCode()).isEqualTo(postalCode);
+        assertThat(dto.getDistributionUtility().getCode()).isEqualTo(duDTO.getCode());
+        assertThat(dto.getDistributionUtility().getDescription()).isEqualTo(duDTO.getDescription());
+    }
 }
