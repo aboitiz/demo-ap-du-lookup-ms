@@ -2,7 +2,6 @@ package com.apc.du.controller;
 
 import com.apc.commons.response.BaseResponse;
 import com.apc.du.commons.constants.APIPathConstants;
-import com.apc.du.commons.dto.APIErrorResponseDTO;
 import com.apc.du.config.SwaggerConfiguration;
 import com.apc.du.exceptions.ServiceDisconnectedException;
 import com.apc.du.services.impl.DULookupService;
