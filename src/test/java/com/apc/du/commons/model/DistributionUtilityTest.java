@@ -43,6 +43,6 @@ class DistributionUtilityTest {
         du2.setDescription(description);
 
         assertThat(du.equals(du2)).isTrue();
-        assertThat(du.hashCode()).isEqualTo(du2.hashCode());
+        assertThat(du.hashCode()).hasSameHashCodeAs(du2.hashCode());
     }
 }

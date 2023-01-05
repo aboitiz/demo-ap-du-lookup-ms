@@ -53,7 +53,7 @@ class PostalCodeTest {
         postalCode2.setDescription(description);
 
         assertThat(postalCode.equals(postalCode2)).isTrue();
-        assertThat(postalCode.hashCode()).isEqualTo(postalCode2.hashCode());
+        assertThat(postalCode.hashCode()).hasSameHashCodeAs(postalCode2.hashCode());
     }
 
 
