@@ -35,6 +35,21 @@ class CityTest {
         assertThat(city.getModifiedAt()).isNull();
     }
 
+    @Test
+    void success_equals() {
+        String code = "CEB", description = "Cebu";
+        City city = new City();
+        city.setCode(code);
+        city.setDescription(description);
+
+        City city2 = new City();
+        city.setCode(code);
+        city.setDescription(description);
+
+        assertThat(city.equals(city2));
+        assertThat(city.hashCode() == city2.hashCode());
+    }
+
     private Province getProvince(String code, String description) {
         return new Province(code, description, new HashSet<City>());
     }

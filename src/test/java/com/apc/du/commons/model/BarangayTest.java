@@ -35,6 +35,21 @@ class BarangayTest {
         assertThat(brgy.getDistributionUtility().getCode()).isEqualTo(distributionUtility.getCode());
     }
 
+    @Test
+    void success_equals() {
+        String code = "CEBADL", description = "Adlaon";
+        Barangay brgy = new Barangay();
+        brgy.setCode(code);
+        brgy.setDescription(description);
+
+        Barangay brgy2 = new Barangay();
+        brgy2.setCode(code);
+        brgy2.setDescription(description);
+
+        assertThat(brgy.equals(brgy2));
+        assertThat(brgy.hashCode() == brgy2.hashCode());
+    }
+
     private Province getProvince(String code, String description) {
         return new Province(code, description, new HashSet<City>());
     }

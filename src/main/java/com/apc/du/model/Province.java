@@ -6,6 +6,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -25,4 +26,17 @@ public class Province extends AuditableEntity {
 
     @OneToMany(mappedBy = "province")
     private Set<City> cities = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Province province)) return false;
+        if (!super.equals(o)) return false;
+        return getCode().equals(province.getCode()) && getDescription().equals(province.getDescription());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getCode(), getDescription());
+    }
 }

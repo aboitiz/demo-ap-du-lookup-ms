@@ -29,4 +29,19 @@ class ProvinceTest {
         assertThat(province.getCreatedAt()).isInstanceOf(Date.class);
         assertThat(province.getCities().stream().toList().get(0)).isInstanceOf(City.class);
     }
+
+    @Test
+    void success_equals() {
+        String code = "CEB", description = "Cebu City";
+        Province province = new Province();
+        province.setCode(code);
+        province.setDescription(description);
+
+        Province province2  = new Province();
+        province2.setCode(code);
+        province2.setDescription(description);
+
+        assertThat(province.equals(province2));
+        assertThat(province.hashCode() == province2.hashCode());
+    }
 }

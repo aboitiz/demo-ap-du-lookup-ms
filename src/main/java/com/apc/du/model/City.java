@@ -7,6 +7,7 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "city")
@@ -33,4 +34,17 @@ public class City extends AuditableEntity {
 
     @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
     private List<Barangay> barangays = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof City city)) return false;
+        if (!super.equals(o)) return false;
+        return getCode().equals(city.getCode()) && getDescription().equals(city.getDescription());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getCode(), getDescription());
+    }
 }

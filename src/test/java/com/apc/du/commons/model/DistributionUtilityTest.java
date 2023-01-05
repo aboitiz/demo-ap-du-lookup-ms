@@ -30,4 +30,19 @@ class DistributionUtilityTest {
         assertThat(du.getModifiedAt()).isNull();
         assertThat(du.getBarangays().stream().toList().get(0)).isInstanceOf(Barangay.class);
     }
+
+    @Test
+    void success_equals() {
+        String code = "VECO", description = "Visayan Electric";
+        DistributionUtility du = new DistributionUtility();
+        du.setCode(code);
+        du.setDescription(description);
+
+        DistributionUtility du2 = new DistributionUtility();
+        du2.setCode(code);
+        du2.setDescription(description);
+
+        assertThat(du.equals(du2));
+        assertThat(du.hashCode() == du2.hashCode());
+    }
 }

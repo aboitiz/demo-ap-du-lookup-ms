@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "barangay")
@@ -28,4 +29,17 @@ public class Barangay extends AuditableEntity {
     @ManyToOne
     @JoinColumn(name = "distributionUtility_id")
     public DistributionUtility distributionUtility;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Barangay barangay)) return false;
+        if (!super.equals(o)) return false;
+        return getCode().equals(barangay.getCode()) && getDescription().equals(barangay.getDescription());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getCode(), getDescription());
+    }
 }

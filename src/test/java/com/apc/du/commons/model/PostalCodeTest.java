@@ -41,6 +41,22 @@ class PostalCodeTest {
         assertThat(postalCode.getDescription()).isEqualTo(description);
     }
 
+    @Test
+    void success_equals() {
+        String code = "6000", description = "6000";
+        PostalCode postalCode = new PostalCode();
+        postalCode.setCode(code);
+        postalCode.setDescription(description);
+
+        PostalCode postalCode2 = new PostalCode();
+        postalCode2.setCode(code);
+        postalCode2.setDescription(description);
+
+        assertThat(postalCode.equals(postalCode2));
+        assertThat(postalCode.hashCode() == postalCode2.hashCode());
+    }
+
+
     private Set<City> getCities() {
         City city = new City("CEB", "CEBU", new Province(), new PostalCode(), new ArrayList<>());
         Set<City> cities = new HashSet<>();
