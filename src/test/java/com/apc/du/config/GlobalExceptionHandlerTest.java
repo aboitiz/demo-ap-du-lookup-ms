@@ -62,12 +62,11 @@ class GlobalExceptionHandlerTest {
         when(handler.buildErrorResponse(STATUS, APIResponse.SUCCESS, httpServletRequest, HttpStatus.OK))
                 .thenReturn(null);
         assertThat(handler.buildErrorResponse(STATUS, APIResponse.SUCCESS, httpServletRequest, HttpStatus.OK))
-                .isEqualTo(null);
+                .isNull();
     }
 
-
     @Test
-    void handleUnexpectedExceptionAPException() throws APException {
+    void handleUnexpectedExceptionAPException() {
         APException exception = new APException(ERROR, HttpStatus.CONFLICT);
         ResponseEntity<?> response =
                 handler.handleUnexpectedException(exception, httpServletRequest);
@@ -75,7 +74,7 @@ class GlobalExceptionHandlerTest {
     }
 
     @Test
-    void handleUnexpectedExceptionAPException1() throws APException {
+    void handleUnexpectedExceptionAPException1() {
         APException exception = new APException(ERROR, MESSAGE, HttpStatus.CONFLICT);
         ResponseEntity<?> response =
                 handler.handleUnexpectedException(exception, httpServletRequest);

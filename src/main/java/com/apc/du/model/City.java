@@ -4,11 +4,10 @@ import com.apc.du.model.base.AuditableEntity;
 import lombok.*;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
-
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "city")
@@ -16,17 +15,36 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class City extends AuditableEntity {
-
-    @Column(length = 255)
-    private String cityCode;
+    @Column(name = "code", length = 255)
+    private String code;
 
     @Column
     @Lob
     @Type(type = "org.hibernate.type.TextType")
     private String description;
 
-    @Column(length = 255)
-    private String provinceCode;
+    @ManyToOne
+    @JoinColumn(name = "province_id")
+    public Province province;
+
+    @ManyToOne
+    @JoinColumn(name = "postalCode_id")
+    public PostalCode postalCode;
+
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
+    private List<Barangay> barangays = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof City city)) return false;
+        if (!super.equals(o)) return false;
+        return getCode().equals(city.getCode()) && getDescription().equals(city.getDescription());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getCode(), getDescription());
+    }
 }

@@ -11,18 +11,18 @@ public class APException extends Exception {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private String code;
+    private final String code;
     private final HttpStatus httpStatus;
 
     public APException(String message, HttpStatus httpStatus) {
         super(message);
         this.httpStatus = httpStatus;
+        code = null;
     }
 
     public APException(String code, String message, HttpStatus httpStatus) {
         super(message);
         this.code = code;
-        this.httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        this.httpStatus = httpStatus;
     }
-
 }

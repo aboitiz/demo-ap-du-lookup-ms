@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Data
 @MappedSuperclass
-public class BaseEntity<T> implements Serializable {
+public class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,12 +23,6 @@ public class BaseEntity<T> implements Serializable {
     @Column( updatable = false, nullable = false )
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
-
-//    /**
-//     * The Creator id.
-//     */
-//    @Column( updatable = false )
-//    protected String createdBy = "";
 
     /**
      * The Created time.

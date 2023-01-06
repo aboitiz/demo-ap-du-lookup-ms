@@ -1,6 +1,5 @@
 package com.apc.du.controller;
 
-
 import com.apc.commons.response.BaseResponse;
 import com.apc.du.commons.constants.APIPathConstants;
 import com.apc.du.config.SwaggerConfiguration;
@@ -24,12 +23,12 @@ public class DULookupController {
     private DULookupService dULookupService;
 
     @GetMapping("/du")
-    public BaseResponse getDUByCityBarangay(@RequestParam String province,
-                              @RequestParam String city,
-                              @RequestParam String barangay,
-                              @RequestParam(required = false) String barangayCode) throws ServiceDisconnectedException {
-
-        return dULookupService.getDUByCityBarangay(province, city, barangay, barangayCode);
+    public BaseResponse getDistributionUtility(
+        @RequestParam String province,
+        @RequestParam String city,
+        @RequestParam String barangay,
+        @RequestParam String postalCode
+    ) throws ServiceDisconnectedException {
+        return dULookupService.getDistributionUtility(province, city, barangay, postalCode);
     }
-
 }

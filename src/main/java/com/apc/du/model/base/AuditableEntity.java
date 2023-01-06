@@ -14,20 +14,12 @@ import java.util.Date;
  */
 @Data
 @MappedSuperclass
-@EqualsAndHashCode( callSuper = true )
+@EqualsAndHashCode(callSuper = true)
 public class AuditableEntity extends BaseEntity {
-//
-//    /**
-//     * The Modified by.
-//     */
-//    @Column
-//    protected String modifiedBy = "";
-
     /**
      * The Modification date.
      */
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     protected Date modifiedAt;
-
 }

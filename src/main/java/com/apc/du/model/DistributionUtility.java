@@ -5,15 +5,17 @@ import lombok.*;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "barangay")
+@Table(name = "distribution_utility")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Barangay extends AuditableEntity {
+public class DistributionUtility extends AuditableEntity {
     @Column(name = "code", length = 255)
     private String code;
 
@@ -22,20 +24,15 @@ public class Barangay extends AuditableEntity {
     @Type(type = "org.hibernate.type.TextType")
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "city_id")
-    public City city;
-
-    @ManyToOne
-    @JoinColumn(name = "distributionUtility_id")
-    public DistributionUtility distributionUtility;
+    @OneToMany(mappedBy = "distributionUtility", fetch = FetchType.LAZY)
+    private Set<Barangay> barangays = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Barangay barangay)) return false;
+        if (!(o instanceof DistributionUtility that)) return false;
         if (!super.equals(o)) return false;
-        return getCode().equals(barangay.getCode()) && getDescription().equals(barangay.getDescription());
+        return getCode().equals(that.getCode()) && getDescription().equals(that.getDescription());
     }
 
     @Override

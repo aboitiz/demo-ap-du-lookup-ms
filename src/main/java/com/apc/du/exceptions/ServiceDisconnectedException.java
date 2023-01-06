@@ -22,6 +22,6 @@ public class ServiceDisconnectedException extends Exception {
     public ServiceDisconnectedException(String code, String message, HttpStatus httpStatus) {
         super(message);
         this.code = code;
-        this.httpStatus = HttpStatus.NOT_FOUND;
+        this.httpStatus = httpStatus;
     }
 }
