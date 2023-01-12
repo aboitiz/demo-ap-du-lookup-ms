@@ -1,9 +1,9 @@
 {
   "BaseUrl": {
-    "baseUrl": "https://ap-du-lookup-ms.apps.qa-sofastaging.aboitizpower.org/swagger-ui/#/Distribution%20Utility%20Lookup/getDistributionUtilityUsingGET"
+    "baseUrl": "https://ap-du-lookup-ms.apps.qa-sofastaging.aboitizpower.org/v1/api"
   },
   "GETRequestVECO": {
-    "endpoint": "/v1/api/du-lookup/du?barangay=Uling&city=Naga%20City&postalCode=6037&province=CEBU",
+    "endpoint": "/du-lookup/du?barangay=Uling&city=Naga%20City&postalCode=6037&province=CEBU",
     "barangay": "Uling",
     "city": "Naga City",
     "province": "CEBU",
@@ -11,7 +11,7 @@
     "du": "Visayan Electric"
   },
   "GETRequestDLPC": {
-    "endpoint": "/v1/api/du-lookup/du?barangay=Katualan&city=Panabo&postalCode=8105&province=DAVAO%20DEL%20NORTE",
+    "endpoint": "/du-lookup/du?barangay=Katualan&city=Panabo&postalCode=8105&province=DAVAO%20DEL%20NORTE",
     "barangay": "Katualan",
     "city": "Panabo",
     "province": "DAVAO DEL NORTE",
@@ -19,7 +19,7 @@
     "du": "Davao Light"
   },
   "GETInvalidRequest": {
-    "endpoint": "/v1/api/du-lookup/du?barangay=Camiling&city=Legazpi&postalCode=4500&province=Albay",
+    "endpoint": "/du-lookup/du?barangay=Camiling&city=Legazpi&postalCode=4500&province=Albay",
     "invalid_result": "No Distribution Utility for the location provided"
   }
 }
