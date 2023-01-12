@@ -5,7 +5,7 @@ Library    JSONLibrary
 
 *** Test Cases ***
 Validate Get Distribution Utility Lookup Service - VECO
-    ${json_obj}=    load json from file    ./du_lookup.json
+    ${json_obj}=    load json from file    ${CURRDIR}/du_lookup.json
     ${baseUrl}=     get value from json     ${json_obj}     BaseUrl.baseUrl
     ${endpoint}=        get value from json     ${json_obj}   GETRequestVECO.endpoint
     create session      usersession   ${baseUrl[0]}
@@ -36,7 +36,7 @@ Validate Get Distribution Utility Lookup Service - VECO
     should be equal         ${actual_du}                ${expected_du}
 
 Validate Get Distribution Utility Lookup Service - DLPC
-    ${json_obj}=    load json from file    ./du_lookup.json
+    ${json_obj}=    load json from file    ${CURDIR}/du_lookup.json
     ${baseUrl}=     get value from json     ${json_obj}     BaseUrl.baseUrl
     ${endpoint}=        get value from json     ${json_obj}   GETRequestDLPC.endpoint
     create session      usersession   ${baseUrl[0]}
@@ -68,7 +68,7 @@ Validate Get Distribution Utility Lookup Service - DLPC
 
 
 Validate Get Invalid Location Distribution Utility Lookup Service
-    ${json_obj}=    load json from file    ./du_lookup.json
+    ${json_obj}=    load json from file    ${CURDIR}/du_lookup.json
     ${baseUrl}=     get value from json     ${json_obj}     BaseUrl.baseUrl
     ${endpoint}=        get value from json     ${json_obj}   GETInvalidRequest.endpoint
     create session      usersession   ${baseUrl[0]}
