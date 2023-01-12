@@ -17,19 +17,19 @@ configurations {
     }
 }
 
-repositories {
-    mavenCentral()
-    mavenLocal()
-}
 //repositories {
-//    maven {
-//        url "$repository"
-//        credentials {
-//            username "$mavenUser"
-//            password "$mavenPassword"
-//        }
-//    }
+//    mavenCentral()
+//    mavenLocal()
 //}
+repositories {
+    maven {
+        url "$repository"
+        credentials {
+            username "$mavenUser"
+            password "$mavenPassword"
+        }
+    }
+}
 
 dependencies {
     implementation 'com.apc.commons:ap-commons-ms:0.0.1'
