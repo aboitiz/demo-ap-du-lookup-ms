@@ -5,7 +5,7 @@ Library    JSONLibrary
 
 *** Test Cases ***
 Validate Get Distribution Utility Lookup Service - VECO
-    ${json_obj}=    load json from file    ${CURRDIR}/du_lookup.json
+    ${json_obj}=    load json from file    ${CURDIR}/du_lookup.json
     ${baseUrl}=     get value from json     ${json_obj}     BaseUrl.baseUrl
     ${endpoint}=        get value from json     ${json_obj}   GETRequestVECO.endpoint
     create session      usersession   ${baseUrl[0]}
