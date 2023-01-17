@@ -4,7 +4,16 @@ metadata:
   name: {{oc_app_name}}
   namespace: {{oc_project}}
 spec:
-  triggers: []
+  triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - {{oc_app_name}}
+        from:
+          kind: ImageStreamTag
+          namespace: {{oc_project}}
+          name: '{{oc_app_name}}:latest'
   replicas: 1
   selector:
     deploymentConfig: {{oc_app_name}}
@@ -17,5 +26,5 @@ spec:
     spec:
       containers:
         - name: {{oc_app_name}}
-          image: {{oc_app_repo}}/{{oc_project}}/{{oc_app_name}}:latest
+          image: {{oc_app_repo}}/{{oc_project}}/{{oc_app_name}}:{{oc_app_version}}
           resources: {}
