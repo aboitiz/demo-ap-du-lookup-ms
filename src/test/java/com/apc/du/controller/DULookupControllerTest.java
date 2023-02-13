@@ -2,7 +2,7 @@ package com.apc.du.controller;
 
 import com.apc.du.commons.constants.APIPathConstants;
 import com.apc.du.exceptions.ServiceDisconnectedException;
-import com.apc.du.services.impl.DULookupService;
+import com.apc.du.services.DULookupService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
