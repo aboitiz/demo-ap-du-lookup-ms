@@ -22,7 +22,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 
@@ -94,11 +93,10 @@ class DULookupServiceImplTest {
     }
 
     @Test
-    void serviceDisconnected_getDULocationNoFilter() throws APException {
+    void serviceDisconnected_getDULocationNoFilter() {
         try {
             doThrow(new IllegalStateException()).when(barangayRepository).getAllDULocations("", "", "", "", "");
             BaseResponse response = service.findAll("", "", "", "", "");
-            System.out.println("RESPONSE : " + response);
             assertThat(response.getDataList()).isEmpty();
         } catch (Exception e) {
             assertThrows(APException.class, () -> service.findAll("", "", "", "", ""));
