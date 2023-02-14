@@ -13,7 +13,7 @@ import java.util.function.Predicate;
 
 @Configuration
 public class SwaggerConfiguration {
-    public static final String DU = "Distribution Utility Lookup";
+    public static final String DU = "Distribution Utility Lookup Service";
 
     @Bean
     public Docket api() {
