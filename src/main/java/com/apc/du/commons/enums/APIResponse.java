@@ -13,14 +13,16 @@ public enum APIResponse {
     APPLICATION_STATUS_NOT_FOUND(404,"APPLICATION_STATUS_NOT_FOUND", "Service Application Not Found.","The request cannot be completed as the application status Reference ID not found."),
     SERVICE_DISCONNECTED(503, "SERVICE_DISCONNECTED", "Service Disconnected", "The REST API service or server indicated is unreachable."),
 
-    DU_LOCATION_NOT_FOUND(404, "DU_LOCATION_NOT_FOUND", "Location Not Found", "No Distribution Utility found for the location provided");
+    DU_LOCATION_NOT_FOUND(404, "DU_LOCATION_NOT_FOUND", "Location Not Found", "No Distribution Utility found for the location provided"),
+    INVALID_REQUEST_BODY(404, "INVALID_REQUEST_BODY", "Invalid Request Body", "Code and Description must be provided and cannot be empty"),
+    EXISTING(404, "EXISTING", "EXISTING", "is already existing");
 
     private final int code;
     private final String message;
     private final String description;
     private final String error;
 
-    APIResponse(int code, String error, String message, String description){
+    APIResponse(int code, String error, String message, String description) {
         this.code = code;
         this.message = message;
         this.description = description;
