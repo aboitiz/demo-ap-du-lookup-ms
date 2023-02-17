@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -89,14 +90,22 @@ public class DULookupServiceImpl implements DULookupService {
 
     @Override
     public BaseResponse postalCode(PostalCodeDTO postalCodeDTO) throws APException {
-        PostalCode postalCode;
+        PostalCode postalCode = null;
         boolean idChecker = postalCodeDTO.getId() != null;
+        Optional<PostalCode> postalCodeChecker;
         if (idChecker) {
             // fetch data from db
-            postalCode = postalCodeRepository.findById(postalCodeDTO.getId().toString());
-            if (!postalCode.getId().toString().isBlank()) {
-                // set data from the DTO or if not provided set data from the default values
+            postalCodeChecker = postalCodeRepository.findById(Long.valueOf(postalCodeDTO.getId().toString()));
+            if (postalCodeChecker.isEmpty()) {
+                return new BaseResponse(new HashMap<>())
+                        .setStatusCodeMessage(
+                                String.valueOf(APIResponse.POSTAL_CODE_NOT_FOUND.getCode()),
+                                APIResponse.POSTAL_CODE_NOT_FOUND.getDescription());
             }
+
+            postalCode = postalCodeChecker.get();
+            // set data from the DTO or if not provided set data from the default values
+
         } else {
             if (postalCodeDTO.getCode().isBlank() || postalCodeDTO.getDescription().isBlank()) {
                 return new BaseResponse(new HashMap<>()).setStatusCodeMessage(
@@ -132,14 +141,17 @@ public class DULookupServiceImpl implements DULookupService {
 
     @Override
     public BaseResponse province(ProvinceDTO provinceDTO) throws APException {
-        Province province;
+        Province province = null;
         boolean idChecker = provinceDTO.getId() != null;
         if (idChecker) {
             // fetch data from db
-            province = provinceRepository.findById(provinceDTO.getId().toString());
-            if (!provinceDTO.getId().toString().isBlank()) {
-                // set data from the DTO or if not provided set data from the default values
+            Optional<Province> provinceChecker = provinceRepository.findById(Long.valueOf(provinceDTO.getId().toString()));
+            if (provinceChecker.isEmpty()) {
+
             }
+            // set data from the DTO or if not provided set data from the default values
+
+
         } else {
             if (provinceDTO.getCode().isBlank() || provinceDTO.getDescription().isBlank()) {
                 return new BaseResponse(new HashMap<>()).setStatusCodeMessage(
@@ -177,14 +189,18 @@ public class DULookupServiceImpl implements DULookupService {
     public BaseResponse city(CityDTO cityDTO) throws APException {
         Province province = null;
         PostalCode postalCode = null;
-        City city;
+        City city = null;
         boolean idChecker = cityDTO.getId() != null;
         if (idChecker) {
             // fetch data from db
-            city = cityRepository.findById(cityDTO.getId().toString());
-            if (!cityDTO.getId().toString().isBlank()) {
-                // set data from the DTO or if not provided set data from the default values
+
+            Optional<City> cityChecker = cityRepository.findById(Long.valueOf(cityDTO.getId().toString()));
+            if (cityChecker.isEmpty()) {
+                // throw err
             }
+
+            // set data from the DTO or if not provided set data from the default values
+
         } else {
             if (cityDTO.getCode().isBlank() ||
                 cityDTO.getDescription().isBlank() ||
@@ -198,14 +214,23 @@ public class DULookupServiceImpl implements DULookupService {
             }
 
             // need additional check if `province_id` and `postal_code_id` is existing in the db.
-            province = provinceRepository.findById(cityDTO.getProvinceId());
-            postalCode = postalCodeRepository.findById(cityDTO.getPostalCodeId());
-            if (province == null || postalCode == null) {
+            Optional<Province> provinceChecker = null;
+            Optional<PostalCode> postalCodeChecker = null;
+
+            provinceChecker = provinceRepository.findById(Long.valueOf(cityDTO.getProvinceId()));
+            postalCodeChecker = postalCodeRepository.findById(Long.valueOf(cityDTO.getPostalCodeId()));
+            if (provinceChecker.isEmpty() || postalCodeChecker.isEmpty()) {
                 return new BaseResponse(new HashMap<>()).setStatusCodeMessage(
                         String.valueOf(APIResponse.INVALID_REQUEST_BODY.getCode()),
                         APIResponse.INVALID_REQUEST_BODY.getDescription()
                 );
             }
+
+
+            province = provinceChecker.get();
+            postalCode = postalCodeChecker.get();
+            System.out.println("PROVINCE >>> " + province);
+            System.out.println("POSTAL CODE >>> " + postalCode);
 
             Long count = cityRepository.countByCode(cityDTO.getCode());
             if (count > 0) {

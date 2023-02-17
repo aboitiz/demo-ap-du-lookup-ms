@@ -14,6 +14,10 @@ public enum APIResponse {
     SERVICE_DISCONNECTED(503, "SERVICE_DISCONNECTED", "Service Disconnected", "The REST API service or server indicated is unreachable."),
 
     DU_LOCATION_NOT_FOUND(404, "DU_LOCATION_NOT_FOUND", "Location Not Found", "No Distribution Utility found for the location provided"),
+    POSTAL_CODE_NOT_FOUND(404, "POSTAL_CODE_NOT_FOUND", "Postal Code Not Found", "Postal Code Not Found"),
+    CITY_NOT_FOUND(404, "CITY_NOT_FOUND", "City Not Found", "City Not Found"),
+    PROVINCE_NOT_FOUND(404, "PROVINCE_NOT_FOUND", "Province Not Found", "Province Not Found"),
+    BARANGAY_NOT_FOUND(404, "BARANGAY_NOT_FOUND", "Barangay Not Found", "Barangay Not Found"),
     INVALID_REQUEST_BODY(404, "INVALID_REQUEST_BODY", "Invalid Request Body", "Code and Description must be provided and cannot be empty"),
     EXISTING(404, "EXISTING", "EXISTING", "is already existing");
 
