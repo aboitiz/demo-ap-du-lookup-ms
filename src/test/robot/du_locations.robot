@@ -5,7 +5,7 @@ Library    JSONLibrary
 
 *** Test Cases ***
 Validate List of Locations for barangay
-    ${json_obj}=    load json from file     du_locations.json
+    ${json_obj}=    load json from file     ${CURDIR}/du_locations.json
     ${baseUrl}=     get value from json     ${json_obj}     BaseUrl.baseUrl
     ${endpoint}=        get value from json     ${json_obj}   GETRequest.brgy_endpoint
     create session      usersession   ${baseUrl[0]}
@@ -27,7 +27,7 @@ Validate List of Locations for barangay
 
 
 Validate List of Locations for City
-    ${json_obj}=    load json from file    du_locations.json
+    ${json_obj}=    load json from file     ${CURDIR}/du_locations.json
     ${baseUrl}=     get value from json     ${json_obj}     BaseUrl.baseUrl
     ${endpoint}=        get value from json     ${json_obj}   GETRequest.city_endpoint
     create session      usersession   ${baseUrl[0]}
@@ -48,7 +48,7 @@ Validate List of Locations for City
     END
 
 Validate List of Locations for DU
-    ${json_obj}=    load json from file    du_locations.json
+    ${json_obj}=    load json from file     ${CURDIR}/du_locations.json
     ${baseUrl}=     get value from json     ${json_obj}     BaseUrl.baseUrl
     ${endpoint}=        get value from json     ${json_obj}   GETRequest.du_endpoint
     create session      usersession   ${baseUrl[0]}
@@ -68,7 +68,7 @@ Validate List of Locations for DU
     END
 
 Validate List of Locations for Postal Code
-    ${json_obj}=    load json from file     du_locations.json
+    ${json_obj}=    load json from file     ${CURDIR}/du_locations.json
     ${baseUrl}=     get value from json     ${json_obj}     BaseUrl.baseUrl
     ${endpoint}=        get value from json     ${json_obj}   GETRequest.postal_endpoint
     create session      usersession   ${baseUrl[0]}
@@ -89,7 +89,7 @@ Validate List of Locations for Postal Code
 
 
 Validate List of Locations for Province
-    ${json_obj}=    load json from file     du_locations.json
+    ${json_obj}=    load json from file     ${CURDIR}/du_locations.json
     ${baseUrl}=     get value from json     ${json_obj}     BaseUrl.baseUrl
     ${endpoint}=        get value from json     ${json_obj}   GETRequest.province_endpoint
     create session      usersession   ${baseUrl[0]}
@@ -109,7 +109,7 @@ Validate List of Locations for Province
     END
 
 Validate Get Invalid Location
-    ${json_obj}=    load json from file     du_locations.json
+    ${json_obj}=    load json from file     ${CURDIR}/du_locations.json
     ${baseUrl}=     get value from json     ${json_obj}     BaseUrl.baseUrl
     ${endpoint}=        get value from json     ${json_obj}   GETInvalidRequest.endpoint
     create session      usersession   ${baseUrl[0]}
