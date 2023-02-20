@@ -1,0 +1,21 @@
+{
+  "BaseUrl": {
+    "baseUrl": "https://ap-du-lookup-ms.apps.qa-sofastaging.aboitizpower.org/"
+  },
+  "GETRequest": {
+    "brgy_endpoint": "/v1/api/du-lookup/locations?barangay=Alejal",
+    "city_endpoint": "/v1/api/du-lookup/locations?city=Carmen",
+    "du_endpoint": "/v1/api/du-lookup/locations?DU=VECO",
+    "postal_endpoint": "/v1/api/du-lookup/locations?postalCode=8101",
+    "province_endpoint": "/v1/api/du-lookup/locations?province=CEBU",
+    "barangay": "Alejal",
+    "city": "Carmen",
+    "province": "CEBU",
+    "code": "8101",
+    "du": "Visayan Electric"
+  },
+  "GETInvalidRequest": {
+    "endpoint": "/v1/api/du-lookup/locations?barangay=Alejal&city=Legazpi%20City&DU=VECO&postalCode=4500&province=Albay",
+    "invalid_result": "No Distribution Utility found for the location provided"
+  }
+}
