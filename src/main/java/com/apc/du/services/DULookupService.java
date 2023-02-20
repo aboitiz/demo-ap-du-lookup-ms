@@ -11,9 +11,9 @@ public interface DULookupService {
     BaseResponse getDistributionUtility(String province, String city, String barangay, String postalCode) throws ServiceDisconnectedException;
 
     BaseResponse findAll(String du, String province, String city, String postalCode, String barangay) throws APException;
-    BaseResponse postalCode(PostalCodeDTO postalCode) throws APException;
+    BaseResponse postalCode(PostalCodeDTO postalCode) throws APException, IllegalAccessException;
 
     BaseResponse province(ProvinceDTO province) throws APException;
 
-    BaseResponse city(CityDTO city) throws APException;
+    BaseResponse city(CityDTO city) throws APException, IllegalAccessException;
 }

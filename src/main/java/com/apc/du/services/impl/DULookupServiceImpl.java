@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +40,7 @@ public class DULookupServiceImpl implements DULookupService {
 
     @Autowired
     private CityRepository cityRepository;
+    private CityDTO cityDTO;
 
     @Override
     public BaseResponse getDistributionUtility(String province, String city, String barangay, String postalCode) throws ServiceDisconnectedException {
@@ -89,22 +91,35 @@ public class DULookupServiceImpl implements DULookupService {
     }
 
     @Override
-    public BaseResponse postalCode(PostalCodeDTO postalCodeDTO) throws APException {
+    public BaseResponse postalCode(PostalCodeDTO postalCodeDTO) throws APException, IllegalAccessException {
         PostalCode postalCode = null;
+        List<String> errArray = new ArrayList<>();
         boolean idChecker = postalCodeDTO.getId() != null;
-        Optional<PostalCode> postalCodeChecker;
         if (idChecker) {
-            // fetch data from db
-            postalCodeChecker = postalCodeRepository.findById(Long.valueOf(postalCodeDTO.getId().toString()));
-            if (postalCodeChecker.isEmpty()) {
-                return new BaseResponse(new HashMap<>())
-                        .setStatusCodeMessage(
-                                String.valueOf(APIResponse.POSTAL_CODE_NOT_FOUND.getCode()),
-                                APIResponse.POSTAL_CODE_NOT_FOUND.getDescription());
+            Optional<PostalCode> postalCodeChecker = postalCodeRepository.findById(Long.valueOf(postalCodeDTO.getId().toString()));
+            if (postalCodeChecker.isEmpty()) errArray.add(APIResponse.POSTAL_CODE_NOT_FOUND.getDescription());
+
+            if (errArray.size() > 0) {
+                return new BaseResponse(errArray)
+                    .setStatusCodeMessage(
+                            String.valueOf(APIResponse.POSTAL_CODE_NOT_FOUND.getCode()),
+                            APIResponse.POSTAL_CODE_NOT_FOUND.getDescription());
             }
 
-            postalCode = postalCodeChecker.get();
-            // set data from the DTO or if not provided set data from the default values
+            try {
+                postalCode = postalCodeChecker.get();
+                PostalCode postalCodeTemp = new PostalCode(postalCodeDTO.getCode(), postalCodeDTO.getDescription(), null);
+                postalCode.updateEntity(postalCodeTemp);
+
+                postalCodeRepository.save(postalCode);
+                return new BaseResponse(postalCodeDTO).setStatusCodeMessage(
+                        String.valueOf(APIResponse.SUCCESS.getCode()),
+                        APIResponse.SUCCESS.getMessage()
+                );
+            } catch (Exception e) {
+                log.error("Exception occurred while saving City. Message: {}", e.getMessage());
+                throw new APException(String.valueOf(APIResponse.SERVICE_DISCONNECTED.getCode()), APIResponse.SERVICE_DISCONNECTED.toString(), HttpStatus.SERVICE_UNAVAILABLE);
+            }
 
         } else {
             if (postalCodeDTO.getCode().isBlank() || postalCodeDTO.getDescription().isBlank()) {
@@ -113,6 +128,7 @@ public class DULookupServiceImpl implements DULookupService {
                         APIResponse.INVALID_REQUEST_BODY.getDescription()
                 );
             }
+            if (postalCodeDTO.getCode().isBlank()) errArray.add(APIResponse);
             Long count = postalCodeRepository.countByCode(postalCodeDTO.getCode());
             if (count > 0) {
                 return new BaseResponse(new HashMap<>()).setStatusCodeMessage(
@@ -186,21 +202,36 @@ public class DULookupServiceImpl implements DULookupService {
     }
 
     @Override
-    public BaseResponse city(CityDTO cityDTO) throws APException {
+    public BaseResponse city(CityDTO cityDTO) throws APException, IllegalAccessException {
         Province province = null;
         PostalCode postalCode = null;
         City city = null;
         boolean idChecker = cityDTO.getId() != null;
         if (idChecker) {
-            // fetch data from db
-
+            List<String> errArray = new ArrayList<>();
             Optional<City> cityChecker = cityRepository.findById(Long.valueOf(cityDTO.getId().toString()));
-            if (cityChecker.isEmpty()) {
-                // throw err
+            Optional<Province> provinceChecker = provinceRepository.findById(Long.valueOf(cityDTO.getProvinceId()));
+            Optional<PostalCode> postalCodeChecker = postalCodeRepository.findById(Long.valueOf(cityDTO.getPostalCodeId()));
+            if (cityChecker.isEmpty()) errArray.add(APIResponse.CITY_NOT_FOUND.getDescription());
+            if (provinceChecker.isEmpty()) errArray.add(APIResponse.PROVINCE_NOT_FOUND.getDescription());
+            if (postalCodeChecker.isEmpty()) errArray.add(APIResponse.POSTAL_CODE_NOT_FOUND.getDescription());
+            if (errArray.size() > 0) {
+                return new BaseResponse(errArray).setStatusCode(String.valueOf(APIResponse.APPLICATION_STATUS_NOT_FOUND.getCode()));
             }
 
-            // set data from the DTO or if not provided set data from the default values
-
+            city = cityChecker.get();
+            City cityTemp = new City(cityDTO.getCode(), cityDTO.getDescription(), province, postalCode, null);
+            city.updateEntity(cityTemp);
+            try {
+                cityRepository.save(city);
+                return new BaseResponse(cityDTO).setStatusCodeMessage(
+                        String.valueOf(APIResponse.SUCCESS.getCode()),
+                        APIResponse.SUCCESS.getMessage()
+                );
+            } catch (Exception e) {
+                log.error("Exception occurred while saving City. Message: {}", e.getMessage());
+                throw new APException(String.valueOf(APIResponse.SERVICE_DISCONNECTED.getCode()), APIResponse.SERVICE_DISCONNECTED.toString(), HttpStatus.SERVICE_UNAVAILABLE);
+            }
         } else {
             if (cityDTO.getCode().isBlank() ||
                 cityDTO.getDescription().isBlank() ||
@@ -219,19 +250,16 @@ public class DULookupServiceImpl implements DULookupService {
 
             provinceChecker = provinceRepository.findById(Long.valueOf(cityDTO.getProvinceId()));
             postalCodeChecker = postalCodeRepository.findById(Long.valueOf(cityDTO.getPostalCodeId()));
-            if (provinceChecker.isEmpty() || postalCodeChecker.isEmpty()) {
-                return new BaseResponse(new HashMap<>()).setStatusCodeMessage(
-                        String.valueOf(APIResponse.INVALID_REQUEST_BODY.getCode()),
-                        APIResponse.INVALID_REQUEST_BODY.getDescription()
-                );
-            }
+            List<String> errArray = new ArrayList<>();
+            if (provinceChecker.isEmpty()) errArray.add(APIResponse.PROVINCE_NOT_FOUND.getDescription());
+            if (postalCodeChecker.isEmpty()) errArray.add(APIResponse.POSTAL_CODE_NOT_FOUND.getDescription());
 
+            if (errArray.size() > 0) {
+                return new BaseResponse(errArray).setStatusCode(String.valueOf(APIResponse.APPLICATION_STATUS_NOT_FOUND.getCode()));
+            }
 
             province = provinceChecker.get();
             postalCode = postalCodeChecker.get();
-            System.out.println("PROVINCE >>> " + province);
-            System.out.println("POSTAL CODE >>> " + postalCode);
-
             Long count = cityRepository.countByCode(cityDTO.getCode());
             if (count > 0) {
                 return new BaseResponse(new HashMap<>()).setStatusCodeMessage(
@@ -239,16 +267,16 @@ public class DULookupServiceImpl implements DULookupService {
                         "City " + APIResponse.EXISTING.getDescription()
                 );
             }
+        }
 
+        try {
             city = new City();
             city.setCode(cityDTO.getCode());
             city.setDescription(cityDTO.getDescription());
             city.setProvince(province);
             city.setPostalCode(postalCode);
-        }
-
-        try {
             cityRepository.save(city);
+
             cityDTO.setId(city.getId());
             cityDTO.setProvinceId(province.getId().toString());
             cityDTO.setPostalCodeId(postalCode.getId().toString());

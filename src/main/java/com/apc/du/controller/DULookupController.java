@@ -69,7 +69,7 @@ public class DULookupController {
             @ApiResponse(code = 503, message = "Service Disconnected")
     })
     @PostMapping(value = "/city", produces = {"application/json"})
-    public ResponseEntity<BaseResponse> city(@RequestBody @Valid CityDTO city) throws APException {
+    public ResponseEntity<BaseResponse> city(@RequestBody @Valid CityDTO city) throws APException, IllegalAccessException {
         BaseResponse result = duLookupService.city(city);
         return new ResponseEntity<>(result, ResponseHelper.getHttpStatus(result.getStatusCode()));
     }

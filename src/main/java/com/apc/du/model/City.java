@@ -17,12 +17,12 @@ import java.util.Objects;
 @AllArgsConstructor
 public class City extends AuditableEntity {
     @Column(name = "code", length = 255)
-    private String code;
+    public String code;
 
     @Column
     @Lob
     @Type(type = "org.hibernate.type.TextType")
-    private String description;
+    public String description;
 
     @ManyToOne
     @JoinColumn(name = "province_id")
@@ -33,7 +33,7 @@ public class City extends AuditableEntity {
     public PostalCode postalCode;
 
     @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
-    private List<Barangay> barangays = new ArrayList<>();
+    public List<Barangay> barangays = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
