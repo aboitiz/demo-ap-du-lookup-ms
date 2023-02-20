@@ -28,7 +28,7 @@ public class DULookupController {
     @Autowired
     private DULookupService dULookupService;
 
-    @ApiIgnore
+
     @GetMapping("/du")
     public BaseResponse getDistributionUtility(
             @RequestParam String province,
