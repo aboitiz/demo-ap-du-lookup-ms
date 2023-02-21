@@ -12,18 +12,18 @@ import javax.validation.constraints.Size;
 @Setter
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CityDTO {
-    @ApiModelProperty(notes = "Unique code of the city", example = "CEB")
+public class BarangayDTO {
+    @ApiModelProperty(notes = "The barangay code", example = "ABCD")
     @Size(min = 2, message = "Code should have at least 2 characters")
     private String code;
 
-    @ApiModelProperty(notes = "Description about the city", example = "relatively permanent and highly organized centre of population")
+    @ApiModelProperty(notes = "Description about the barangay", example = "A barangay is the smallest political unit in the country")
     @Size(min = 2, message = "Description should have at least 2 characters")
     private String description;
 
-    @ApiModelProperty(position = 0, notes = "The id of the province where the city belongs to", example = "1")
-    private Long provinceId;
+    @ApiModelProperty(position = 0, notes = "The id of distribution utility where the barangay belongs to", example = "1")
+    private Long distributionUtilityId;
 
-    @ApiModelProperty(position = 1, notes = "The id of the postal code where the city belongs to", example = "8800")
-    private Long postalCodeId;
+    @ApiModelProperty(position = 1, notes = "The id of city where the barangay belongs to", example = "1")
+    private Long cityId;
 }

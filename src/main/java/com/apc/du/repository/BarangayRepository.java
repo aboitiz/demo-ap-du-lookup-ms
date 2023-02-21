@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface BarangayRepository extends JpaRepository<Barangay, Long> {
+    Long countByCode(String code);
     @Query(value = "SELECT NEW com.apc.du.commons.dto.APIResponseDTO(p.description, c.description, pc.code, b.description, du.id, du.code, du.description)" +
             " FROM Barangay AS b" +
             " JOIN City AS c ON b.city.id = c.id" +

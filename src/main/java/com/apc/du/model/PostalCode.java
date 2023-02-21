@@ -17,15 +17,15 @@ import java.util.Set;
 @AllArgsConstructor
 public class PostalCode extends AuditableEntity {
     @Column(name = "code", length = 255)
-    private String code;
+    public String code;
 
     @Column(name = "description")
     @Lob
     @Type(type = "org.hibernate.type.TextType")
-    private String description;
+    public String description;
 
     @OneToMany(mappedBy = "postalCode")
-    private Set<City> cities = new HashSet<>();
+    public Set<City> cities = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

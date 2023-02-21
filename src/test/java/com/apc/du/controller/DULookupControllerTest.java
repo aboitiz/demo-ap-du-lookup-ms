@@ -2,10 +2,15 @@ package com.apc.du.controller;
 
 import com.apc.commons.response.BaseResponse;
 import com.apc.du.commons.constants.APIPathConstants;
+import com.apc.du.commons.dto.BarangayDTO;
+import com.apc.du.commons.dto.CityDTO;
+import com.apc.du.commons.dto.PostalCodeDTO;
+import com.apc.du.commons.dto.ProvinceDTO;
 import com.apc.du.commons.enums.APIResponse;
 import com.apc.du.exceptions.APException;
 import com.apc.du.exceptions.ServiceDisconnectedException;
 import com.apc.du.services.DULookupService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +20,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -30,6 +36,9 @@ class DULookupControllerTest {
 
     @MockBean
     private DULookupService service;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {
@@ -124,6 +133,78 @@ class DULookupControllerTest {
                 .andDo(print())
                 .andExpect(status().is4xxClientError())
                 .andReturn();
+    }
+
+    @Test
+    void success_create_postal_code() throws Exception {
+        when(service.postalCode(any())).thenReturn(new BaseResponse<>().setStatusCode(String.valueOf(HttpStatus.CREATED.value())));
+        mockMvc.perform(post(url() + "/postalCode")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(objectMapper.writeValueAsString(new PostalCodeDTO()))
+        ).andDo(print()).andExpect(status().isCreated());
+    }
+
+    @Test
+    void success_update_postal_code() throws Exception {
+        when(service.postalCode(any(), any())).thenReturn(new BaseResponse<>().setStatusCode(String.valueOf(HttpStatus.OK.value())));
+        mockMvc.perform(put(url() + "/postalCode/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new PostalCodeDTO()))
+        ).andDo(print()).andExpect(status().isOk());
+    }
+
+    @Test
+    void success_create_province() throws Exception {
+        when(service.province(any())).thenReturn(new BaseResponse<>().setStatusCode(String.valueOf(HttpStatus.CREATED.value())));
+        mockMvc.perform(post(url() + "/province")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new ProvinceDTO()))
+        ).andDo(print()).andExpect(status().isCreated());
+    }
+
+    @Test
+    void success_update_province() throws Exception {
+        when(service.province(any(), any())).thenReturn(new BaseResponse<>().setStatusCode(String.valueOf(HttpStatus.OK.value())));
+        mockMvc.perform(put(url() + "/province/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new ProvinceDTO()))
+        ).andDo(print()).andExpect(status().isOk());
+    }
+
+    @Test
+    void success_create_city() throws Exception {
+        when(service.city(any())).thenReturn(new BaseResponse<>().setStatusCode(String.valueOf(HttpStatus.CREATED.value())));
+        mockMvc.perform(post(url() + "/city")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new CityDTO()))
+        ).andDo(print()).andExpect(status().isCreated());
+    }
+
+    @Test
+    void success_update_city() throws Exception {
+        when(service.city(any(), any())).thenReturn(new BaseResponse<>().setStatusCode(String.valueOf(HttpStatus.OK.value())));
+        mockMvc.perform(put(url() + "/city/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new CityDTO()))
+        ).andDo(print()).andExpect(status().isOk());
+    }
+
+    @Test
+    void success_create_barangay() throws Exception {
+        when(service.barangay(any())).thenReturn(new BaseResponse<>().setStatusCode(String.valueOf(HttpStatus.CREATED.value())));
+        mockMvc.perform(post(url() + "/barangay")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new BarangayDTO()))
+        ).andDo(print()).andExpect(status().isCreated());
+    }
+
+    @Test
+    void success_update_barangay() throws Exception {
+        when(service.barangay(any(), any())).thenReturn(new BaseResponse<>().setStatusCode(String.valueOf(HttpStatus.OK.value())));
+        mockMvc.perform(put(url() + "/barangay/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new BarangayDTO()))
+        ).andDo(print()).andExpect(status().isOk());
     }
 
     private String url() {

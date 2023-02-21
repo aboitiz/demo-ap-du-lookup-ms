@@ -1,6 +1,5 @@
 package com.apc.du.commons.dto;
 
-
 import com.apc.du.commons.dto.locations.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LocationsDTO {
-
     private Province province;
     private City city;
     private PostalCode postalCode;
@@ -27,8 +25,3 @@ public class LocationsDTO {
         this.distributionUtility = new DistributionUtility(duId, duCode, duDesc);
     }
 }
-
-
-
-
-
