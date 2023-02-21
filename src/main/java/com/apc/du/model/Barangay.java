@@ -15,12 +15,12 @@ import java.util.Objects;
 @AllArgsConstructor
 public class Barangay extends AuditableEntity {
     @Column(name = "code", length = 255)
-    private String code;
+    public String code;
 
     @Column
     @Lob
     @Type(type = "org.hibernate.type.TextType")
-    private String description;
+    public String description;
 
     @ManyToOne
     @JoinColumn(name = "city_id")

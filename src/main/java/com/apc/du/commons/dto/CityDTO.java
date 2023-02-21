@@ -2,17 +2,20 @@ package com.apc.du.commons.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.Size;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CityDTO {
+    @ApiModelProperty(notes = "Id of the city", example = "1")
+    Long id;
+
     @ApiModelProperty(notes = "Unique code of the city", example = "CEB")
     @Size(min = 2, message = "Code should have at least 2 characters")
     private String code;

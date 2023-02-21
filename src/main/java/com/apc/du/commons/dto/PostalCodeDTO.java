@@ -13,6 +13,9 @@ import javax.validation.constraints.*;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PostalCodeDTO {
+    @ApiModelProperty(notes = "Id of the postal code", example = "1")
+    Long id;
+
     @ApiModelProperty(notes = "Unique code of the postal code", example = "2200")
     @Size(min = 2, message = "Code should have at least 2 characters")
     private String code;

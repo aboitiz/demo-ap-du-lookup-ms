@@ -20,7 +20,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -146,10 +145,11 @@ class DULookupControllerTest {
 
     @Test
     void success_update_postal_code() throws Exception {
+        PostalCodeDTO update = PostalCodeDTO.builder().id(1L).build();
         when(service.postalCode(any(), any())).thenReturn(new BaseResponse<>().setStatusCode(String.valueOf(HttpStatus.OK.value())));
-        mockMvc.perform(put(url() + "/postalCode/1")
+        mockMvc.perform(post(url() + "/postalCode")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(new PostalCodeDTO()))
+                .content(objectMapper.writeValueAsString(update))
         ).andDo(print()).andExpect(status().isOk());
     }
 
@@ -164,10 +164,11 @@ class DULookupControllerTest {
 
     @Test
     void success_update_province() throws Exception {
+        ProvinceDTO update = ProvinceDTO.builder().id(1L).build();
         when(service.province(any(), any())).thenReturn(new BaseResponse<>().setStatusCode(String.valueOf(HttpStatus.OK.value())));
-        mockMvc.perform(put(url() + "/province/1")
+        mockMvc.perform(post(url() + "/province")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(new ProvinceDTO()))
+                .content(objectMapper.writeValueAsString(update))
         ).andDo(print()).andExpect(status().isOk());
     }
 
@@ -182,10 +183,11 @@ class DULookupControllerTest {
 
     @Test
     void success_update_city() throws Exception {
+        CityDTO update = CityDTO.builder().id(1L).build();
         when(service.city(any(), any())).thenReturn(new BaseResponse<>().setStatusCode(String.valueOf(HttpStatus.OK.value())));
-        mockMvc.perform(put(url() + "/city/1")
+        mockMvc.perform(post(url() + "/city")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(new CityDTO()))
+                .content(objectMapper.writeValueAsString(update))
         ).andDo(print()).andExpect(status().isOk());
     }
 
@@ -200,10 +202,11 @@ class DULookupControllerTest {
 
     @Test
     void success_update_barangay() throws Exception {
+        BarangayDTO update = BarangayDTO.builder().id(1L).build();
         when(service.barangay(any(), any())).thenReturn(new BaseResponse<>().setStatusCode(String.valueOf(HttpStatus.OK.value())));
-        mockMvc.perform(put(url() + "/barangay/1")
+        mockMvc.perform(post(url() + "/barangay")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(new BarangayDTO()))
+                .content(objectMapper.writeValueAsString(update))
         ).andDo(print()).andExpect(status().isOk());
     }
 
